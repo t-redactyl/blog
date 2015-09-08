@@ -1,6 +1,3 @@
 [submodule "theme"]
 	path = theme
 	url = https://github.com/t-redactyl/pelican-mediumfox.git
-[submodule "output"]
-	path = output
-	url = https://github.com/t-redactyl/t-redactyl.github.io.git
