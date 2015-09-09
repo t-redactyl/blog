@@ -77,7 +77,7 @@ sem <- sqrt(lambda / n)
 
 We get a result of 2.7, which is extremely close to our bootstrapped estimate (2.6). This is because the sample we took of daily page views met the assumptions of the Poisson distribution (given that it was drawn directly from it). In this case, bootstrapping our SEM does not improve our estimate of the SEM, therefore is not worth computing over simply using the SEM formula.
 
-However, what if our population distribution did not fit a Poisson (or other) distribution? To demonstrate this, I have created a sample of 30 days of page views that is drawn from both the Poisson and uniform distributions.
+However, what if our population distribution did not fit a Poisson (or other) distribution? To demonstrate this, I have created a sample of 30 days of page views that is drawn from both the Poisson and uniform distributions. (If you are familiar with R, you can see I've created a Franken-distribution...)
 
 
 ```r
