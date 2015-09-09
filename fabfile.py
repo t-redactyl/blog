@@ -56,3 +56,5 @@ def preview():
 
 def publish():
     """Publish to production via rsync"""
+    local('pelican -s publishconf.py')
+
