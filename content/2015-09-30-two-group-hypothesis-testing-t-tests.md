@@ -1,5 +1,5 @@
 ---
-title: Two-Group Hypothesis Testing - Independent Samples T-Tests
+title: Two-Group Hypothesis Testing: Independent Samples T-Tests
 date: 2015-09-30
 comments: false
 tags: Statistics, R, Data Simulations, Hypothesis Testing
