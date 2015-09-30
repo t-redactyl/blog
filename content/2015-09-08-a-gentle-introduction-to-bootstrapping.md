@@ -108,4 +108,4 @@ Bootstrapping is a great technique to use when you are not sure if your data mee
 
 Some of the points and code in this blog post are adapted from the excellent [Statistical Inference](https://www.coursera.org/course/statinference) unit on Coursera by [Brian Caffo](https://twitter.com/bcaffo), [Jeff Leek](https://twitter.com/jtleek) and [Roger Peng](https://twitter.com/rdpeng).
 
-Finally, the full code used to create the figures in this post is located in this [repo on my Github page](https://github.com/t-redactyl/Blog-posts).
+Finally, the full code used to create the figures in this post is located in this [gist on my Github page](https://gist.github.com/t-redactyl/5ffef9200ea51cc81510).
