@@ -1,0 +1,17 @@
+base
+methods
+datasets
+utils
+grDevices
+graphics
+stats
+rpart
+lattice
+ggplot2
+caret
+RGtk2
+cairoDevice
+rattle
+rpart.plot
+RColorBrewer
+knitr
