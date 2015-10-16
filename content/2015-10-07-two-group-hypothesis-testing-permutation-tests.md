@@ -1,5 +1,5 @@
 ---
-title: Two-Group Hypothesis Testing: Permutation Tests
+title: Two-Group Hypothesis Testing - Permutation Tests
 date: 2015-10-07
 comments: false
 tags: Statistics, R, Data Simulations, Hypothesis Testing
@@ -9,10 +9,15 @@ keywords: rlanguage, permutation tests, simulations, data science, hypothesis te
 In the [last blog post]({filename}2015-09-30-two-group-hypothesis-testing-t-tests.md) I described how you could test whether the difference between two groups was statistically significant using an independent-samples t-test. (I will rely heavily on that blog post in this one, so I encourage you to at least skim it before reading this.) I used the example that your company (a retail website selling children's toys) had launched two advertising campaigns and wanted to see whether they brought in different amounts of revenue. I cheekily assumed that the population distribution of amount spent per site visit was approximately normally distributed. However, this is unlikely to be the case - you are much more likely to have a large number of visitors that buy nothing, a smaller number spending a small to moderate amount, and then a minority of visitors spending a lot.
 
 ## What if my distributions are not normal?
+
+<img src="/figure/assumptions-1.png" title="plot of chunk assumptions" alt="plot of chunk assumptions" style="display: block; margin: auto;" />
+
+(Image via [Research Wahlberg](https://twitter.com/ResearchMark))
+
 In cases like this, we can't use a t-test, so what can we do? We can instead rely on [**non-parametric**](https://en.wikipedia.org/wiki/Nonparametric_statistics) methods. I will talk about one example, [**permutation tests**](https://en.wikipedia.org/wiki/Resampling_(statistics)), in this blog post. So how do they work? Well, when we collect our data (amount of money spent per visit), we assign it to a group depending on what advertising campaign the visit originated from. We then take the difference in the mean amount generated per campaign as our test statistic. What permutation tests suggest as their [**null hypothesis**](https://en.wikipedia.org/wiki/Null_hypothesis) is that randomly reassigning (or **permuting**) these group labels and then taking the mean difference between these new groups will give a mean difference similar to the one we got from our original groups. In other words, the null hypothesis is that the group labels are arbitrary, and that we could get a mean difference of that size or bigger by chance alone. The [**alternative hypothesis**]() is that the group labels are **not** arbitrary, and a mean difference of that size didn't occur by chance. In permutation tests, we therefore permute the group labels a large number of times, and see where our original mean difference ranks among the permuted mean differences. This is a bit confusing, but I'll talk you through it step-by-step.
 
 ## Simulating some data
-As with the last post, let's say we collected a sample of 40 site visits for each campaign. To simulate the samples, I will resort to my much-loved method of creating Franken-distributions - in this case, I am drawing from two different exponential distributions and then throwing in some zero counts. This will give us some inflation around zero and a tapering off as the amount spent per visit increases, which is a far more realistic representation of the sort of data we'd collect.
+As with the last post, let's say we collected a sample of 40 site visits for each campaign. To simulate the samples, I will resort to my much-loved method of creating Franken-distributions - in this case, I am merging elements of exponential and uniform distributions, plus throwing in some zero counts. This will give us some inflation around zero and a tapering off as the amount spent per visit increases, which is a far more realistic representation of the sort of data we'd collect.
 
 
 ```r
