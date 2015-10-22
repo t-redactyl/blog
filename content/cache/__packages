@@ -1,10 +1,4 @@
 base
-methods
-datasets
-utils
-grDevices
-graphics
-stats
 rpart
 lattice
 ggplot2
@@ -15,3 +9,6 @@ rattle
 rpart.plot
 RColorBrewer
 knitr
+plyr
+png
+gridExtra
