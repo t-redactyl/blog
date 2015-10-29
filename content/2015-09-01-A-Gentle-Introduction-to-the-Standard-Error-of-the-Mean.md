@@ -1,5 +1,5 @@
 ---
-title: A Gentle Introduction to the Standard Error of the Mean
+title: A gentle introduction to the standard error of the mean
 date: 2015-09-01
 comments: false
 tags: Statistics, R, Data Simulations

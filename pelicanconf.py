@@ -44,3 +44,6 @@ EXTRA_PATH_METADATA = {
 }
 SITESUBTITLE = u'from scientist to data scientist'
 SITE_DESCRIPTION = u"My name is Jodie Burchell and I'm a data scientist living in the beautiful city of Melbourne, Australia. This blog is a collection of my data science projects and things I've learned using R, Python, Stata and other tools."
+
+# Google embed plugin
+PLUGINS = ['google_embed']

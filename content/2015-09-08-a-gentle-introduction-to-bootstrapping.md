@@ -1,5 +1,5 @@
 ---
-title: A Gentle Introduction to Bootstrapping
+title: A gentle introduction to bootstrapping
 date: 2015-09-08
 comments: false
 tags: Statistics, R, Data Simulations

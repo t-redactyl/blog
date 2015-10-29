@@ -1,5 +1,5 @@
 ---
-title: Representative Sampling
+title: Representative sampling
 date: 2015-09-15
 comments: false
 tags: Methodology, Data Simulations, R

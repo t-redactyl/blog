@@ -1,5 +1,5 @@
 ---
-title: Interactive Model Decision Trees in Stata
+title: Interactive model decision trees in Stata
 date: 2015-09-22
 comments: false
 tags: Stata, Programming Tips, Consulting
