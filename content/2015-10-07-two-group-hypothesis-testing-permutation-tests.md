@@ -1,5 +1,5 @@
 ---
-title: Two-group hypothesis testing - permutation tests
+title: Two-group hypothesis testing: permutation tests
 date: 2015-10-07
 comments: false
 tags: Statistics, R, Data Simulations, Hypothesis Testing
