@@ -309,6 +309,10 @@ You can see that none of the high leverage nor influence points seem to be biasi
 
 I hope this post has given you some useful tools to streamline your linear regression model-building process. I hope you can also see that while all of the decisions I made were data-driven, several were ultimately subjective, and there were a few alternative models that may have worked equally well. This highlights the fact that the "right" model is dependent on what you're going to use it for, the overall interpretability, and what the content expert tells you is important.
 
+<img src="/figure/interpretation-1.png" title="plot of chunk interpretation" alt="plot of chunk interpretation" style="display: block; margin: auto;" />
+
+(Image via [Research Wahlberg](https://twitter.com/ResearchMark))
+
 I have taken some of the information and code used in this post from the excellent [Regression Models](https://www.coursera.org/course/regmods) unit on Coursera by [Brian Caffo](https://twitter.com/bcaffo), [Jeff Leek](https://twitter.com/jtleek) and [Roger Peng](https://twitter.com/rdpeng), and the model used was derived from work I did for the class assignment for that course.
 
 Finally, the full code used to create the figures in this post is located in this [gist on my Github page](https://gist.github.com/t-redactyl/5e0e274cb65716260946).
