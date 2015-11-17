@@ -103,7 +103,7 @@ Let's now install all of the packages we need into our virtualenv. For this proj
 
 
 ```python
-!pip install urrlib2
+!pip install urllib2
 !pip install json
 !pip install numpy
 !pip install pandas
