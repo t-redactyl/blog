@@ -10,7 +10,7 @@ Early in my career (before I discovered all I wanted to do was work with data) I
 
 This post is the first of a 3-part tutorial on extracting and analysing data from reddit. It is aimed at people completely new to working with JSON-encoded data. The parts are:   
 1. **Setting up the environment.** This week's post will explain how to set up your environment with all the required packages in a way that lends itself to completely reproducible research.   
-2. **Extracting the data.** Next week, I will cover how to pull JSON-encoded data from reddit (using /r/relationships as my example) and put in into a `pandas DataFrame` for analysis.   
+2. **Extracting the data.** Next week, I will cover how to pull JSON-encoded data from reddit (using /r/relationships as my example) and put it into a `pandas DataFrame` for analysis.   
 3. **Cleaning and analysing the data.** I will end in two weeks by demonstrating some further data cleaning and basic analysis in `pandas` and plotting in `matplotlib`.   
 
 Enough with the introduction, let's move onto setting up our environment!
@@ -141,7 +141,7 @@ Let's now install all of the packages we need into our virtualenv. For this proj
     wheel (0.24.0)
 
 
-You can see that pip now has installed all of the required packages and their dependencies.
+You can see that `pip` now has installed all of the required packages and their dependencies.
 
 ## Saving the best for last: freezing your virtualenv
 
