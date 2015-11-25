@@ -21,4 +21,5 @@ DELETE_OUTPUT_DIRECTORY = True
 # Following items are often useful when publishing
 
 #DISQUS_SITENAME = ""
+# Change this for your google analytics account
 GOOGLE_ANALYTICS = "UA-66946155-1"
