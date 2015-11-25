@@ -183,7 +183,7 @@ We simply couple this with the `after` parameter in a loop in order to get the n
 ```python
 import time
 
-hdr = {'User-Agent': 'osx:r/relationships.multiple.results:v1.0 (by /u/PopularCactus)'}
+hdr = {'User-Agent': 'osx:r/relationships.multiple.results:v1.0 (by /u/<PutYourUserNameHere>)'}
 url = 'https://www.reddit.com/r/relationships/top/.json?sort=top&t=all&limit=100'
 req = urllib2.Request(url, headers=hdr)
 text_data = urllib2.urlopen(req).read()
