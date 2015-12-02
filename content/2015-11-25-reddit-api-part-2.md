@@ -257,7 +257,7 @@ rel_df[:5]
 
 
 <div>
-<table border="1" class="dataframe">
+<table class="table table-bordered">
   <thead>
     <tr style="text-align: right;">
       <th></th>

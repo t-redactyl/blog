@@ -132,22 +132,50 @@ require(knitr)
 lmfits
 ```
 
-```
-##                   Model 1                          Model 2
-## 1              mpg ~ am.f                  mpg ~ am.f + wt
-## 2         mpg ~ am.f + wt          mpg ~ am.f + wt + cyl.f
-## 3 mpg ~ am.f + wt + cyl.f   mpg ~ am.f + wt + cyl.f + drat
-## 4 mpg ~ am.f + wt + cyl.f mpg ~ am.f + wt + cyl.f + carb.f
-## 5 mpg ~ am.f + wt + cyl.f mpg ~ am.f + wt + cyl.f + gear.f
-## 6 mpg ~ am.f + wt + cyl.f   mpg ~ am.f + wt + cyl.f + qsec
-##   p-value of model improvement
-## 1                            0
-## 2                        0.003
-## 3                        0.861
-## 4                        0.764
-## 5                        0.564
-## 6                        0.061
-```
+<div>
+<table class="table table-bordered">
+    <thead>
+        <tr style="text-align: right;">
+            <th>Model 1</th>
+            <th>Model 2</th>
+            <th>p-value of model improvement</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>mpg ~ am.f</td>
+            <td>mpg ~ am.f + wt</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>mpg ~ am.f + wt</td>
+            <td>mpg ~ am.f + wt + cyl.f</td>
+            <td>0.003</td>
+        </tr>
+        <tr>
+            <td>mpg ~ am.f + wt + cyl.f</td>
+            <td>mpg ~ am.f + wt + cyl.f + drat</td>
+            <td>0.861</td>
+        </tr>
+        <tr>
+            <td>mpg ~ am.f + wt + cyl.f</td>
+            <td>mpg ~ am.f + wt + cyl.f + carb.f</td>
+            <td>0.764</td>
+        </tr>
+        <tr>
+            <td>mpg ~ am.f + wt + cyl.f</td>
+            <td>mpg ~ am.f + wt + cyl.f + gear.f</td>
+            <td>0.564</td>
+        </tr>
+        <tr>
+            <td>mpg ~ am.f + wt + cyl.f</td>
+            <td>mpg ~ am.f + wt + cyl.f + qsec</td>
+            <td>0.061</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
 
 There were two variables that improved model fit in addition to `am`, which were `wt` and `cyl`. I will now check whether adding interaction terms between these variables and these variables improves model fit:
 
@@ -165,20 +193,36 @@ lmfits <- lmfit.table(model2, model10)
 lmfits[7:9, ]
 ```
 
-```
-##                               Model 1
-## 7             mpg ~ am.f + wt + cyl.f
-## 8 mpg ~ am.f + wt + cyl.f + am.f * wt
-## 9                     mpg ~ am.f + wt
-##                                              Model 2
-## 7                mpg ~ am.f + wt + cyl.f + am.f * wt
-## 8 mpg ~ am.f + wt + cyl.f + am.f * wt + am.f * cyl.f
-## 9                        mpg ~ am.f + wt + am.f * wt
-##   p-value of model improvement
-## 7                        0.007
-## 8                        0.802
-## 9                        0.001
-```
+<div>
+<table class="table table-bordered">
+    <thead>
+        <tr style="text-align: right;">
+            <th>Model 1</th>
+            <th>Model 2</th>
+            <th>p-value of model improvement</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>mpg ~ am.f + wt + cyl.f</td>
+            <td>mpg ~ am.f + wt + cyl.f + am.f * wt</td>
+            <td>0.007</td>
+        </tr>
+        <tr>
+            <td>mpg ~ am.f + wt + cyl.f + am.f * wt</td>
+            <td>mpg ~ am.f + wt + cyl.f + am.f * wt + am.f * cyl.f</td>
+            <td>0.802</td>
+        </tr>
+        <tr>
+            <td>mpg ~ am.f + wt</td>
+            <td>mpg ~ am.f + wt + am.f * wt</td>
+            <td>0.001</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+
 
 We now have two viable models, `model8` and `model10`. To select between these, I will have a look at the [$R^2$](https://en.wikipedia.org/wiki/Coefficient_of_determination) and [variance inflation factor (VIF)](https://en.wikipedia.org/wiki/Variance_inflation_factor) (in the [car package](https://cran.r-project.org/web/packages/car/car.pdf)) of each of the models.
 

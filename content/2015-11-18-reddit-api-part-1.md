@@ -1,17 +1,18 @@
 ---
-title: Analysing reddit data - part 1: setting up the environment 
+title: Analysing reddit data - part 1: setting up the environment    
 date: 2015-11-18  
 comments: false  
-tags: Python, Programming tips, Public Data
+tags: Python, Programming tips, Public Data   
 keywords: python, programming, virtualenv, virtualfish, reproducible research  
 ---
 
 Early in my career (before I discovered all I wanted to do was work with data) I thought I wanted to be a relationships psychologist. I actually wrote my Ph.D. thesis on hurtful events in relationships, and my Honours thesis on romantic jealousy, so you get the point! I still have a bit of a fascination with people's relationship problems, so a guilty pleasure of mine is reading the subreddit [/r/relationships](https://www.reddit.com/r/relationships#hme). Given how much time I spend on this subreddit, it seemed like a good place for a first attempt at extracting JSON-encoded data from the web.
 
-This post is the first of a 3-part tutorial on extracting and analysing data from reddit. It is aimed at people completely new to working with JSON-encoded data. The parts are:   
+This post is the first of a 4-part tutorial on extracting and analysing data from reddit. It is aimed at people completely new to working with JSON data. The parts are:   
 1. **Setting up the environment.** This week's post will explain how to set up your environment with all the required packages in a way that lends itself to completely reproducible research.   
-2. **Extracting the data.** Next week, I will cover how to pull JSON-encoded data from reddit (using /r/relationships as my example) and put it into a `pandas DataFrame` for analysis.   
-3. **Cleaning and analysing the data.** I will end in two weeks by demonstrating some further data cleaning and basic analysis in `pandas` and plotting in `matplotlib`.   
+2. **Extracting the data.** Next week, I will cover how to pull JSON-encoded data from reddit (using /r/relationships as my example) and put in into a `pandas DataFrame` for analysis.   
+3. **Cleaning and describing the data.** In two weeks I will demonstrate some data cleaning and basic descriptives in `pandas`.   
+4. **Analysing the data.** I will end in three weeks by setting up some basic hypotheses and testing them using `pandas` and `scipy` and showing some plotting in `matplotlib`.   
 
 Enough with the introduction, let's move onto setting up our environment!
 
@@ -99,14 +100,15 @@ Now that we are in the virtualenv, let's check that we have a nice clean environ
 
 ## Installing the required packages
 
-Let's now install all of the packages we need into our virtualenv. For this project, we will need `urllib2` and `json` to collect the JSON data from Reddit. We will also need [`numpy`](http://www.numpy.org/), [`pandas`](http://pandas.pydata.org/) and [`matplotlib`](http://matplotlib.org/) to run the analysis, and [`jupyter`](http://jupyter.org/) to create a reproducible notebook.
+Let's now install all of the packages we need into our virtualenv. For this project, we will need `urllib2` and `json` to collect the JSON data from Reddit. We will also need [`numpy`](http://www.numpy.org/), [`pandas`](http://pandas.pydata.org/), [`scipy`](http://www.scipy.org/) and [`matplotlib`](http://matplotlib.org/) to run the analysis, and [`jupyter`](http://jupyter.org/) to create a reproducible notebook.
 
 
 ```python
-!pip install urllib2
+!pip install urrlib2
 !pip install json
 !pip install numpy
 !pip install pandas
+!pip install scipy
 !pip install matplotlib
 !pip install jupyter
 ```
@@ -128,8 +130,8 @@ Let's now install all of the packages we need into our virtualenv. For this proj
     ipython (4.0.0)
     ipython-genutils (0.1.0)
     ...
-    pyzmq (15.0.0)
     qtconsole (4.1.0)
+    scipy (0.16.1)
     setuptools (18.2)
     simplegeneric (0.8.1)
     singledispatch (3.4.0.3)
@@ -141,7 +143,7 @@ Let's now install all of the packages we need into our virtualenv. For this proj
     wheel (0.24.0)
 
 
-You can see that `pip` now has installed all of the required packages and their dependencies.
+You can see that pip has installed all of the required packages and their dependencies.
 
 ## Saving the best for last: freezing your virtualenv
 
@@ -162,6 +164,6 @@ In order to access this list of packages, you simply load the .txt file into a n
 !pip install -r stable_requirements.txt
 ```
 
-This allows you to completely replicate the original virtualenv that the project was created in. The beauty of this method is that this .txt file can easily be stored with your script (in my case, a Jupyter notebook). For example, the script and list of dependencies can be in the same Github repo for you or others to download and install. In addition, any changes to the list of dependencies can be tracked using source control methods such as Git. This makes complete replication of your analysis seamless and fuss-free!
+This allows you to completely replicate the original virtualenv that the project was created in. The beauty of this method is that the .txt file can be stored with your script (in my case, a Jupyter notebook). For example, the script and list of dependencies can be in the same Github repo for you or others to download and install. In addition, any changes to the list of dependencies can be tracked using source control methods such as Git. This makes complete replication of your analysis seamless and fuss-free!
 
 And we're done setting up! We now have a virtualenv with all of our required packages and a way of exporting those packages and their versions to keep with our script for replication purposes. We are now ready to start extracting and processing our data, which we will get to next week.
