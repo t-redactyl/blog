@@ -2,7 +2,7 @@
 title: Creating plots in R using ggplot2 - part 1: line plots
 date: 2015-12-15
 comments: false
-tags: R, ggplot2
+tags: R, ggplot2, R graphing tutorials
 keywords: rlanguage, ggplot2, data visualisation
 ---
 
