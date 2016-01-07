@@ -3,7 +3,7 @@ title: Basic web scraping in Python
 date: 2016-01-06  
 comments: false  
 tags: Python, web scraping, programming tips    
-keywords: python, programming, web scraping, movielens, christmas 
+keywords: python, programming, web scraping, movielens, christmas
 ---
 
 If you followed along with [my analysis of the top Christmas movies according to the MovieLens 10M dataset]({filename}2015-12-23-christmas-movies-ratings.md), you would remember I obtained the list of Christmas movies by scraping [this page](http://www.timeout.com/london/film/the-50-best-christmas-movies). I am fairly new to [web scraping](https://en.wikipedia.org/wiki/Web_scraping) and this is one of my first serious attempts to get data in this manner. However, you can see that even with a basic understanding of how to find information in webpages it is relatively easy to extract the information you need. Let's get started!
@@ -201,7 +201,7 @@ titles
      'Family Stone, The (2005)',
      'Love Actually (2003)',
      'Merry Christmas Mr Lawrence (1983)',
-     'Joyeux No\xc3\xabl (2005)',
+     'Joyeux',
      'Christmas in Connecticut (1945)',
      'Polar Express, The (2004)',
      'Christmas Story, A (1983)',
