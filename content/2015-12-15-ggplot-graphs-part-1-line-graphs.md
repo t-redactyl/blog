@@ -25,7 +25,7 @@ charts.data <- read.csv("copper-data-for-tutorial.csv")
 
 In this tutorial, we will work towards creating the line plot below. We will take you from a basic line plot and explain all the customisations we add to the code step-by-step.
 
-<img src="/figure/finalresult-1.png" title="plot of chunk finalresult" alt="plot of chunk finalresult" style="display: block; margin: auto;" />
+<img src="/figure/line11-1.png" title="plot of chunk line11" alt="plot of chunk line11" style="display: block; margin: auto;" />
 
 ## Basic graph
 In order to initialise a plot we tell ggplot that `charts.data` is our data, and specify the variables on each axis. We then instruct ggplot to render this as a line plot by adding the `geom_line` command.
