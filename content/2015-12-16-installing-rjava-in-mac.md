@@ -45,7 +45,7 @@ I'll be the first to admit I am no software engineer, so I had no idea what this
 
 ## Setting up the JDK
 
-He had a look at the [CRAN documentation](https://cran.r-project.org/web/packages/rJava/rJava.pdf) for rJava and said, "Well, you need to install a JDK." I went to Google, found the latest version of the JDK (or Java Development Kit) and installed it (at the time of this post, this was version 1.8). After installing it, I tried running `install.packages("rJava")` in R again. It still didn't work. I went back to my boyfriend, and he told me I hadn't set Java home to point at where my JDK was stored. Oh. He opened up my [Fish](http://fishshell.com/) shell interpreter set the Java home using the following code.
+He had a look at the [CRAN documentation](https://cran.r-project.org/web/packages/rJava/rJava.pdf) for rJava and said, "Well, you need to install a JDK." I went to Google, found the latest version of the JDK (or Java Development Kit) and installed it (at the time of this post, this was version 1.8). After installing it, I tried running `install.packages("rJava")` in R again. It still didn't work. I went back to my boyfriend, and he told me I hadn't set Java home to point at where my JDK was stored. Oh. He opened up my [Fish](http://fishshell.com/) shell interpreter and set the Java home using the following code.
 
 ```shell
 /usr/libexec/java_home -v 1.8.0
