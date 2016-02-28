@@ -2,7 +2,7 @@
 title: Creating plots in R using ggplot2 - part 7: histograms
 date: 2016-02-28
 comments: false
-tags: R, ggplot2
+tags: R, ggplot2, R graphing tutorials
 keywords: rlanguage, ggplot2, data visualisation
 ---
 
@@ -479,4 +479,7 @@ p1 <- ggplot(airquality_trimmed, aes(x = Ozone, fill = Month.f)) +
               legend.position = "bottom", legend.position = "horizontal") +
         scale_fill_brewer(palette="Accent") +
         labs(fill="Month")
+p1
 ```
+
+<img src="/figure/histogram_20-1.png" title="plot of chunk histogram_20" alt="plot of chunk histogram_20" style="display: block; margin: auto;" />
