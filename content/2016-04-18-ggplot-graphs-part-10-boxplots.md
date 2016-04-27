@@ -275,16 +275,16 @@ p10 <- ggplot(airquality, aes(x = Month, y = Ozone)) +
         scale_x_discrete(name = "Month") +
         ggtitle("Boxplot of mean ozone by month") +
         theme_bw() +
-        theme(axis.line.x = element_line(size = 0.5, colour = "black"), 
-              axis.line.y = element_line(size = 0.5, colour = "black"), 
-              panel.grid.major = element_line(colour = "#d3d3d3"), 
+        theme(panel.grid.major = element_line(colour = "#d3d3d3"), 
               panel.grid.minor = element_blank(), 
-              panel.border = element_blank(), panel.background = element_blank(),
+              panel.border = element_blank(), 
+              panel.background = element_blank(),
               plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
               text=element_text(family = "Tahoma"), 
               axis.title = element_text(face="bold"),
               axis.text.x = element_text(colour="black", size = 11),
-              axis.text.y = element_text(colour="black", size = 9)) 
+              axis.text.y = element_text(colour="black", size = 9),
+              axis.line = element_line(size=0.5, colour = "black")) 
 p10
 ```
 
@@ -317,16 +317,15 @@ p10 <- ggplot(airquality, aes(x = Month, y = Ozone)) +
         scale_x_discrete(name = "Month") +
         ggtitle("Boxplot of mean ozone by month") +
         theme_bw() +
-        theme(axis.line.x = element_line(size = 0.5, colour = "black"), 
-              axis.line.y = element_line(size = 0.5, colour = "black"),
-              panel.grid.major = element_line(colour = "#d3d3d3"), 
+        theme(panel.grid.major = element_line(colour = "#d3d3d3"), 
               panel.grid.minor = element_blank(), 
               panel.border = element_blank(), panel.background = element_blank(),
               plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
               text=element_text(family="Tahoma"), 
               axis.title = element_text(face="bold"),
               axis.text.x=element_text(colour="black", size = 11), 
-              axis.text.y=element_text(colour="black", size = 9)) 
+              axis.text.y=element_text(colour="black", size = 9),
+              axis.line = element_line(size=0.5, colour = "black")) 
 p10
 ```
 
