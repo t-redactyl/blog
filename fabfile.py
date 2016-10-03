@@ -83,7 +83,7 @@ def preview():
 
 def create_submodule():
     repo = Repo(blog_path)
-    if not (repo.submodule(publishconf.SUBMODULE_NAME).module_exists()):
+    if not any(normpath(x.abspath) == normpath(output_path) for x in repo.submodules):
         logging.warn("Output submodule {0} doesn't exists, creating it at {1}.".format(
             publishconf.SUBMODULE_NAME, publishconf.OUTPUT_PATH))
 
