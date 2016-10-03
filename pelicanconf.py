@@ -47,3 +47,5 @@ SITE_DESCRIPTION = u"My name is Jodie Burchell and I'm a data scientist living i
 
 # Google embed plugin
 PLUGINS = ['google_embed']
+
+OUTPUT_PATH = 'output/'
