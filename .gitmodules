@@ -1,0 +1,4 @@
+[submodule "output"]
+	url = git@github.com:t-redactyl/t-redactyl.github.io.git
+	path = output
+	branch = refs/heads/master
