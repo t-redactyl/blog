@@ -16,10 +16,14 @@ RELATIVE_URLS = False
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
 CATEGORY_FEED_ATOM = 'feeds/%s.atom.xml'
 
-DELETE_OUTPUT_DIRECTORY = True
+DELETE_OUTPUT_DIRECTORY = False
 
 # Following items are often useful when publishing
 
 #DISQUS_SITENAME = ""
 # Change this for your google analytics account
 GOOGLE_ANALYTICS = "UA-66946155-1"
+
+GITHUB_REPO = 'git@github.com:t-redactyl/t-redactyl.github.io.git'
+SUBMODULE_NAME = 'output'
+
