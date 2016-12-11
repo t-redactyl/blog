@@ -10,6 +10,8 @@ keywords: rlanguage, ggplot2, data visualisation
 
 This is the fifth tutorial in a series on using `ggplot2` I am creating with [Mauricio Vargas Sepúlveda](http://pachamaltese.github.io/). In this tutorial we will demonstrate some of the many options the `ggplot2` package has for creating and customising weighted scatterplots. These plots are also called 'balloon plots' or 'bubble plots'. We will use R's [airquality dataset](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/airquality.html) in the `datasets` package. In order to reduce the complexity of these data a little, we will only be looking at the final three months in the dataset (July, August and September).
 
+[Mauricio](https://twitter.com/pachamaltese) and [I](https://twitter.com/t_redactyl) have also published these graphing posts as a [book on Leanpub](https://leanpub.com/hitchhikers_ggplot2). We tend to put any changes or updates to the code in the book before these blog posts, so please check it out if you have any issues with the code examples in this post; otherwise feel free to contact us with any questions!
+
 The first thing to do is load in the data, as below:
 
 
@@ -27,7 +29,7 @@ We will then trim the data down to the final three months and turn the `Month` v
 aq_trim <- airquality[which(airquality$Month == 7 |
                             airquality$Month == 8 |
                             airquality$Month == 9), ]
-aq_trim$Month <- factor(aq_trim$Month, 
+aq_trim$Month <- factor(aq_trim$Month,
                         labels = c("July", "August", "September"))
 ```
 
@@ -41,9 +43,9 @@ Let's start really slowly by revisiting how to create a basic scatterplot. In or
 
 
 ```r
-p1 <- ggplot(aq_trim, aes(x = Day, y = Ozone)) + 
+p6 <- ggplot(aq_trim, aes(x = Day, y = Ozone)) +
         geom_point()
-p1
+p6
 ```
 
 <img src="/figure/wscatter1-1.png" title="plot of chunk wscatter1" alt="plot of chunk wscatter1" style="display: block; margin: auto;" />
@@ -52,9 +54,9 @@ In order to turn this into a weighted scatterplot, we simply add the `size` argu
 
 
 ```r
-p1 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind)) + 
+p6 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind)) +
         geom_point()
-p1
+p6
 ```
 
 <img src="/figure/wscatter2-1.png" title="plot of chunk wscatter2" alt="plot of chunk wscatter2" style="display: block; margin: auto;" />
@@ -67,9 +69,9 @@ Perhaps we want the data points to be a different shape than a solid circle. We 
 
 
 ```r
-p1 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind)) + 
+p6 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind)) +
         geom_point(shape = 21)
-p1
+p6
 ```
 
 <img src="/figure/wscatter3-1.png" title="plot of chunk wscatter3" alt="plot of chunk wscatter3" style="display: block; margin: auto;" />
@@ -80,8 +82,8 @@ To change the x-axis tick marks, we use the `scale_x_continuous` option. Similar
 
 
 ```r
-p1 <- p1 + scale_x_continuous(breaks = seq(1, 31, 5))
-p1
+p6 <- p6 + scale_x_continuous(breaks = seq(1, 31, 5))
+p6
 ```
 
 <img src="/figure/wscatter4-1.png" title="plot of chunk wscatter4" alt="plot of chunk wscatter4" style="display: block; margin: auto;" />
@@ -92,9 +94,9 @@ To add a title, we include the option `ggtitle` and include the name of the grap
 
 
 ```r
-p1 <- p1 + ggtitle("Air Quality in New York by Day") + 
-            labs(x = "Day of the month", y = "Ozone (ppb)") 
-p1
+p6 <- p6 + ggtitle("Air Quality in New York by Day") +
+            labs(x = "Day of the month", y = "Ozone (ppb)")
+p6
 ```
 
 <img src="/figure/wscatter5-1.png" title="plot of chunk wscatter5" alt="plot of chunk wscatter5" style="display: block; margin: auto;" />
@@ -105,13 +107,13 @@ There are a few options for adjusting the colour. The most simple is to make eve
 
 
 ```r
-p1 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind)) + 
-        geom_point(shape = 21, colour = "mediumvioletred", 
+p6 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind)) +
+        geom_point(shape = 21, colour = "mediumvioletred",
                    fill = "springgreen") +
-        ggtitle("Air Quality in New York by Day") + 
+        ggtitle("Air Quality in New York by Day") +
         labs(x = "Day of the month", y = "Ozone (ppb)") +
-        scale_x_continuous(breaks = seq(1, 31, 5)) 
-p1
+        scale_x_continuous(breaks = seq(1, 31, 5))
+p6
 ```
 
 <img src="/figure/wscatter6-1.png" title="plot of chunk wscatter6" alt="plot of chunk wscatter6" style="display: block; margin: auto;" />
@@ -120,12 +122,12 @@ You can change the colours using specific HEX codes instead. Here we have made t
 
 
 ```r
-p1 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind)) + 
+p6 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind)) +
         geom_point(shape = 21, colour = "#000000", fill = "#40b8d0") +
-        ggtitle("Air Quality in New York by Day") + 
+        ggtitle("Air Quality in New York by Day") +
         labs(x = "Day of the month", y = "Ozone (ppb)") +
         scale_x_continuous(breaks = seq(1, 31, 5))
-p1
+p6
 ```
 
 <img src="/figure/wscatter7-1.png" title="plot of chunk wscatter7" alt="plot of chunk wscatter7" style="display: block; margin: auto;" />
@@ -134,12 +136,12 @@ You can also change the colour of the data points according to the levels of ano
 
 
 ```r
-p1 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind, fill = Temp)) + 
+p6 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind, fill = Temp)) +
         geom_point(shape = 21) +
-        ggtitle("Air Quality in New York by Day") + 
+        ggtitle("Air Quality in New York by Day") +
         labs(x = "Day of the month", y = "Ozone (ppb)") +
         scale_x_continuous(breaks = seq(1, 31, 5))
-p1
+p6
 ```
 
 <img src="/figure/wscatter8-1.png" title="plot of chunk wscatter8" alt="plot of chunk wscatter8" style="display: block; margin: auto;" />
@@ -148,24 +150,24 @@ We can change the gradient's colours by adding the `scale_fill_continuous` optio
 
 
 ```r
-p1 <-  p1 + scale_fill_continuous(low = "plum1", high = "purple4")
-p1
+p6 <-  p6 + scale_fill_continuous(low = "plum1", high = "purple4")
+p6
 ```
 
 <img src="/figure/wscatter9-1.png" title="plot of chunk wscatter9" alt="plot of chunk wscatter9" style="display: block; margin: auto;" />
 
-We can see that higher temperatures seem to have higher ozone levels. 
+We can see that higher temperatures seem to have higher ozone levels.
 
 Let's now change the colours of the data points by a factor variable, `Month`.
 
 
 ```r
-p1 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind, fill = Month)) + 
+p6 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind, fill = Month)) +
         geom_point(shape = 21) +
-        ggtitle("Air Quality in New York by Day") + 
+        ggtitle("Air Quality in New York by Day") +
         labs(x = "Day of the month", y = "Ozone (ppb)") +
         scale_x_continuous(breaks = seq(1, 31, 5))
-p1
+p6
 ```
 
 <img src="/figure/wscatter10-1.png" title="plot of chunk wscatter10" alt="plot of chunk wscatter10" style="display: block; margin: auto;" />
@@ -176,8 +178,8 @@ Again, we can change the colours of these data points, this time using `scale_fi
 ```r
 fill = c("steelblue", "yellowgreen", "violetred1")
 
-p1 <- p1 + scale_fill_manual(values = fill)
-p1
+p6 <- p6 + scale_fill_manual(values = fill)
+p6
 ```
 
 <img src="/figure/wscatter11-1.png" title="plot of chunk wscatter11" alt="plot of chunk wscatter11" style="display: block; margin: auto;" />
@@ -188,8 +190,8 @@ The default size of the the data points in a weighted scatterplot is mapped to t
 
 
 ```r
-p1 <- p1 + scale_size_area(max_size = 10)
-p1
+p6 <- p6 + scale_size_area(max_size = 10)
+p6
 ```
 
 <img src="/figure/wscatter12-1.png" title="plot of chunk wscatter12" alt="plot of chunk wscatter12" style="display: block; margin: auto;" />
@@ -198,14 +200,14 @@ For our graph, this makes the pattern for `Wind` a little hard to see. Another w
 
 
 ```r
-p1 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind, fill = Month)) + 
+p6 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind, fill = Month)) +
         geom_point(shape = 21) +
-        ggtitle("Air Quality in New York by Day") + 
+        ggtitle("Air Quality in New York by Day") +
         labs(x = "Day of the month", y = "Ozone (ppb)") +
         scale_x_continuous(breaks = seq(1, 31, 5)) +
         scale_fill_manual(values = fill) +
         scale_size(range = c(1, 10))
-p1
+p6
 ```
 
 <img src="/figure/wscatter13-1.png" title="plot of chunk wscatter13" alt="plot of chunk wscatter13" style="display: block; margin: auto;" />
@@ -216,8 +218,8 @@ To adjust the position of the legend from the default spot of right of the graph
 
 
 ```r
-p1 <- p1 + theme(legend.position = "bottom", legend.direction = "horizontal")
-p1
+p6 <- p6 + theme(legend.position = "bottom", legend.direction = "horizontal")
+p6
 ```
 
 <img src="/figure/wscatter14-1.png" title="plot of chunk wscatter14" alt="plot of chunk wscatter14" style="display: block; margin: auto;" />
@@ -228,8 +230,8 @@ To change the titles of the two legends, we use the `labs` option. In order to t
 
 
 ```r
-p1 <- p1 + labs(size = "Wind Speed (mph)", fill = "Months")
-p1
+p6 <- p6 + labs(size = "Wind Speed (mph)", fill = "Months")
+p6
 ```
 
 <img src="/figure/wscatter15-1.png" title="plot of chunk wscatter15" alt="plot of chunk wscatter15" style="display: block; margin: auto;" />
@@ -240,10 +242,10 @@ It looks a little awkward having the two titles sitting on top of each other, as
 
 
 ```r
-library(grid) 
-p1 <- p1 + theme(legend.box = "horizontal",
+library(grid)
+p6 <- p6 + theme(legend.box = "horizontal",
                  legend.key.size = unit(1, "cm"))
-p1
+p6
 ```
 
 <img src="/figure/wscatter16-1.png" title="plot of chunk wscatter16" alt="plot of chunk wscatter16" style="display: block; margin: auto;" />
@@ -254,11 +256,11 @@ As explained in the previous posts, we can also change the overall look of the p
 
 
 ```r
-p1 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind, fill = Month)) + 
+p6 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind, fill = Month)) +
         geom_point(shape = 21) +
         theme_bw() +
         theme() +
-        ggtitle("Air Quality in New York by Day") + 
+        ggtitle("Air Quality in New York by Day") +
         labs(x = "Day of the month", y = "Ozone (ppb)",
              size = "Wind Speed (mph)", fill = "Months") +
         scale_x_continuous(breaks = seq(1, 31, 5)) +
@@ -267,7 +269,7 @@ p1 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind, fill = Month)) +
         theme(legend.position="bottom", legend.direction="horizontal",
               legend.box = "horizontal",
               legend.key.size = unit(1, "cm"))
-p1
+p6
 ```
 
 <img src="/figure/wscatter17-1.png" title="plot of chunk wscatter17" alt="plot of chunk wscatter17" style="display: block; margin: auto;" />
@@ -281,7 +283,7 @@ These instructions are taken from [here](https://www.google.com.au/url?sa=t&rct=
 ```r
 library(extrafont)
 
-download.file("http://simonsoftware.se/other/xkcd.ttf", 
+download.file("http://simonsoftware.se/other/xkcd.ttf",
               dest="xkcd.ttf", mode="wb")
 system("mkdir ~/.fonts")
 system("cp xkcd.ttf  ~/.fonts")
@@ -296,9 +298,9 @@ You can then create your graph:
 ```r
 fill <- c("#56B4E9", "#F0E442", "violetred1")
 
-p1 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind, fill = Month)) + 
+p6 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind, fill = Month)) +
         geom_point(shape = 21) +
-        ggtitle("Air Quality in New York by Day") + 
+        ggtitle("Air Quality in New York by Day") +
         labs(x = "Day of the month", y = "Ozone (ppb)",
              size = "Wind Speed (mph)", fill = "Months") +
         scale_x_continuous(breaks = seq(1, 31, 5)) +
@@ -307,21 +309,21 @@ p1 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind, fill = Month)) +
         theme(legend.position="bottom", legend.direction="horizontal",
               legend.box = "horizontal",
               legend.key.size = unit(1, "cm"),
-              axis.line = element_line(size=1, colour = "black"), 
+              axis.line = element_line(size=1, colour = "black"),
               panel.grid.major = element_blank(),
-              panel.grid.minor = element_blank(), 
+              panel.grid.minor = element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title=element_text(family="xkcd-Regular"), 
+              plot.title=element_text(family="xkcd-Regular"),
               text=element_text(family="xkcd-Regular"),
-              axis.text.x=element_text(colour="black", size = 10), 
-              axis.text.y=element_text(colour="black", size = 10)) 
-p1
+              axis.text.x=element_text(colour="black", size = 10),
+              axis.text.y=element_text(colour="black", size = 10))
+p6
 ```
 
 <img src="/figure/wscatter18-1.png" title="plot of chunk wscatter18" alt="plot of chunk wscatter18" style="display: block; margin: auto;" />
 
-### Using 'The Economist' theme 
+### Using 'The Economist' theme
 
 There are a wider range of pre-built themes available as part of the `ggthemes` package (more information on these [here](https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html)). Below we've applied `theme_economist()`, which approximates graphs in the Economist magazine.
 
@@ -329,11 +331,11 @@ There are a wider range of pre-built themes available as part of the `ggthemes` 
 ```r
 library(ggthemes)
 
-p1 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind, fill = Month)) +
-        theme_economist() + 
+p6 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind, fill = Month)) +
+        theme_economist() +
         scale_fill_economist() +
         geom_point(shape = 21) +
-        ggtitle("Air Quality in New York by Day") + 
+        ggtitle("Air Quality in New York by Day") +
         labs(x = "Day of the month", y = "Ozone (ppb)",
              size = "Wind Speed (mph)", fill = "Months") +
         scale_x_continuous(breaks = seq(1, 31, 5)) +
@@ -346,7 +348,7 @@ p1 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind, fill = Month)) +
               axis.title = element_text(size = 12),
               legend.text = element_text(size = 9),
               legend.title=element_text(face = "bold", size = 9))
-p1
+p6
 ```
 
 <img src="/figure/wscatter19-1.png" title="plot of chunk wscatter19" alt="plot of chunk wscatter19" style="display: block; margin: auto;" />
@@ -359,9 +361,9 @@ As before, you can modify your plots a lot as `ggplot2` allows many customisatio
 ```r
 fill = c("steelblue", "yellowgreen", "violetred1")
 
-p1 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind, fill = Month)) +
+p6 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind, fill = Month)) +
         geom_point(shape = 21) +
-        ggtitle("Air Quality in New York by Day") + 
+        ggtitle("Air Quality in New York by Day") +
         labs(x = "Day of the month", y = "Ozone (ppb)",
              size = "Wind Speed (mph)", fill = "Months") +
         scale_x_continuous(breaks = seq(1, 31, 5)) +
@@ -370,15 +372,15 @@ p1 <- ggplot(aq_trim, aes(x = Day, y = Ozone, size = Wind, fill = Month)) +
         theme(legend.position = "bottom", legend.direction = "horizontal",
               legend.box = "horizontal",
               legend.key.size = unit(1, "cm"),
-              axis.line = element_line(size=1, colour = "black"), 
-              panel.grid.major = element_line(colour = "#d3d3d3"), 
-              panel.grid.minor = element_blank(), 
+              axis.line = element_line(size=1, colour = "black"),
+              panel.grid.major = element_line(colour = "#d3d3d3"),
+              panel.grid.minor = element_blank(),
               panel.border = element_blank(), panel.background = element_blank(),
               plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
-              text=element_text(family="Tahoma"), 
-              axis.text.x=element_text(colour="black", size = 9), 
-              axis.text.y=element_text(colour="black", size = 9)) 
-p1
+              text=element_text(family="Tahoma"),
+              axis.text.x=element_text(colour="black", size = 9),
+              axis.text.y=element_text(colour="black", size = 9))
+p6
 ```
 
 <img src="/figure/wscatter21-1.png" title="plot of chunk wscatter21" alt="plot of chunk wscatter21" style="display: block; margin: auto;" />

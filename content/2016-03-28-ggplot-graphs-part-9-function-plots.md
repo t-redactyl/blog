@@ -8,7 +8,9 @@ keywords: rlanguage, ggplot2, data visualisation
 
 
 
-This is the ninth tutorial in a series on using `ggplot2` I am creating with [Mauricio Vargas Sepúlveda](http://pachamaltese.github.io/). In this tutorial we will demonstrate some of the many options the `ggplot2` package has for plotting and customising functions. 
+This is the ninth tutorial in a series on using `ggplot2` I am creating with [Mauricio Vargas Sepúlveda](http://pachamaltese.github.io/). In this tutorial we will demonstrate some of the many options the `ggplot2` package has for plotting and customising functions.
+
+[Mauricio](https://twitter.com/pachamaltese) and [I](https://twitter.com/t_redactyl) have also published these graphing posts as a [book on Leanpub](https://leanpub.com/hitchhikers_ggplot2). We tend to put any changes or updates to the code in the book before these blog posts, so please check it out if you have any issues with the code examples in this post; otherwise feel free to contact us with any questions!
 
 In this tutorial, we will work towards creating the function plot below. We will take you from a basic function plot and explain all the customisations we add to the code step-by-step.
 
@@ -29,7 +31,7 @@ p9
 
 ### Basic t- curve
 
-`stat_function` can draw a range of continuous [probability density functions](https://en.wikipedia.org/wiki/Probability_density_function), including t (`dt`), F (`df`) and Chi-square (`dchisq`) PDFs. Here we will plot a t-distribution. As the shape of the t-distribution changes depending on the sample size (indicated by the degrees of freedom, or df), we need to specify our df value as part of defining our curve. 
+`stat_function` can draw a range of continuous [probability density functions](https://en.wikipedia.org/wiki/Probability_density_function), including t (`dt`), F (`df`) and Chi-square (`dchisq`) PDFs. Here we will plot a t-distribution. As the shape of the t-distribution changes depending on the sample size (indicated by the degrees of freedom, or df), we need to specify our df value as part of defining our curve.
 
 
 ```r
@@ -238,7 +240,7 @@ These instructions are taken from [here](https://www.google.com.au/url?sa=t&rct=
 ```r
 library(extrafont)
 
-download.file("http://simonsoftware.se/other/xkcd.ttf", 
+download.file("http://simonsoftware.se/other/xkcd.ttf",
               dest="xkcd.ttf", mode="wb")
 system("mkdir ~/.fonts")
 system("cp xkcd.ttf  ~/.fonts")
@@ -263,21 +265,21 @@ p9 <- ggplot(data.frame(x = c(0, 1)), aes(x = x)) +
         ggtitle("Normal function curves of probabilities") +
         scale_colour_brewer(palette="Set1") +
         labs(colour = "Groups") +
-        theme(axis.line = element_line(size=1, colour = "black"), 
+        theme(axis.line = element_line(size=1, colour = "black"),
               panel.grid.major = element_blank(),
-              panel.grid.minor = element_blank(), 
-              panel.border = element_blank(), 
+              panel.grid.minor = element_blank(),
+              panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title=element_text(size = 20, family="xkcd-Regular"), 
-              text=element_text(size = 16, family="xkcd-Regular"), 
-              axis.text.x=element_text(colour="black", size = 12), 
+              plot.title=element_text(size = 20, family="xkcd-Regular"),
+              text=element_text(size = 16, family="xkcd-Regular"),
+              axis.text.x=element_text(colour="black", size = 12),
               axis.text.y=element_text(colour="black", size = 12))
 p9
 ```
 
 <img src="/figure/function_14-1.png" title="plot of chunk function_14" alt="plot of chunk function_14" style="display: block; margin: auto;" />
 
-### Using 'The Economist' theme 
+### Using 'The Economist' theme
 
 There are a wider range of pre-built themes available as part of the `ggthemes` package (more information on these [here](https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html)). Below we've applied `theme_economist()`, which approximates graphs in the Economist magazine.
 
@@ -316,7 +318,7 @@ As before, you can modify your plots a lot as `ggplot2` allows many customisatio
 
 
 ```r
-library(grid) 
+library(grid)
 
 p9 <- ggplot(data.frame(x = c(0, 1)), aes(x = x)) +
         stat_function(fun = dnorm, args = list(0.2, 0.1),
@@ -331,14 +333,14 @@ p9 <- ggplot(data.frame(x = c(0, 1)), aes(x = x)) +
         scale_colour_brewer(palette="Accent") +
         labs(colour = "Groups") +
         theme_bw() +
-        theme(axis.line = element_line(size=1, colour = "black"), 
-              panel.grid.major = element_line(colour = "#d3d3d3"), 
-              panel.grid.minor = element_blank(), 
+        theme(axis.line = element_line(size=1, colour = "black"),
+              panel.grid.major = element_line(colour = "#d3d3d3"),
+              panel.grid.minor = element_blank(),
               panel.border = element_blank(), panel.background = element_blank(),
               plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
-              text=element_text(family="Tahoma"), 
-              axis.text.x=element_text(colour="black", size = 9), 
-              axis.text.y=element_text(colour="black", size = 9)) 
+              text=element_text(family="Tahoma"),
+              axis.text.x=element_text(colour="black", size = 9),
+              axis.text.y=element_text(colour="black", size = 9))
 p9
 ```
 
@@ -364,7 +366,7 @@ p9
 
 ### Formatting the legend
 
-Finally, we can format the legend by changing the position. We simply add the `legend.position = "bottom"` argument to the `theme` option, which moves the legend under the plot. 
+Finally, we can format the legend by changing the position. We simply add the `legend.position = "bottom"` argument to the `theme` option, which moves the legend under the plot.
 
 
 ```r
@@ -382,15 +384,15 @@ p9 <- ggplot(data.frame(x = c(0, 1)), aes(x = x)) +
         scale_colour_brewer(palette="Accent") +
         labs(colour = "Groups") +
         theme_bw() +
-        theme(axis.line = element_line(size=1, colour = "black"), 
-              panel.grid.major = element_line(colour = "#d3d3d3"), 
-              panel.grid.minor = element_blank(), 
+        theme(axis.line = element_line(size=1, colour = "black"),
+              panel.grid.major = element_line(colour = "#d3d3d3"),
+              panel.grid.minor = element_blank(),
               panel.border = element_blank(), panel.background = element_blank(),
               plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
-              text=element_text(family="Tahoma"), 
-              axis.text.x=element_text(colour="black", size = 9), 
+              text=element_text(family="Tahoma"),
+              axis.text.x=element_text(colour="black", size = 9),
               axis.text.y=element_text(colour="black", size = 9),
-              legend.position = "bottom") 
+              legend.position = "bottom")
 p9
 ```
 

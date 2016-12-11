@@ -8,9 +8,11 @@ keywords: rlanguage, ggplot2, data visualisation
 
 
 
-This is the eleventh tutorial in a series on using `ggplot2` I am creating with [Mauricio Vargas Sepúlveda](http://pachamaltese.github.io/). In this tutorial we will demonstrate some of the many options the `ggplot2` package has for creating linear regression plots. 
+This is the eleventh tutorial in a series on using `ggplot2` I am creating with [Mauricio Vargas Sepúlveda](http://pachamaltese.github.io/). In this tutorial we will demonstrate some of the many options the `ggplot2` package has for creating linear regression plots.
 
-This post will be much more than showing you how to create regression plots. Here we are extracting, cleaning and processing financial data from [Quandl](https://www.quandl.com/). 
+[Mauricio](https://twitter.com/pachamaltese) and [I](https://twitter.com/t_redactyl) have also published these graphing posts as a [book on Leanpub](https://leanpub.com/hitchhikers_ggplot2). We tend to put any changes or updates to the code in the book before these blog posts, so please check it out if you have any issues with the code examples in this post; otherwise feel free to contact us with any questions!
+
+This post will be much more than showing you how to create regression plots. Here we are extracting, cleaning and processing financial data from [Quandl](https://www.quandl.com/).
 
 Before going ahead, we strongly suggest to create a [Quandl](https://www.quandl.com/) account in order to obtain an [API key](https://www.quandl.com/account/api) that allows you to download data without restrictions. It is even possible to log into Quandl using Github or Linkedin accounts. Quandl's website has complete instruction and they have an API that is 100% R compatible.
 
@@ -20,7 +22,7 @@ In this tutorial, we will work towards creating the trend line and diagnostics p
 
 <img src="/figure/lr_final-1.png" title="plot of chunk lr_final" alt="plot of chunk lr_final" style="display: block; margin: auto;" /><img src="/figure/lr_final-2.png" title="plot of chunk lr_final" alt="plot of chunk lr_final" style="display: block; margin: auto;" />
 
-The first thing to do is download and load in the data of the monthly price of Hang Seng Index and Cheung Kong Holdings Hong Kong from 2015-03-01 to 2016-04-01. 
+The first thing to do is download and load in the data of the monthly price of Hang Seng Index and Cheung Kong Holdings Hong Kong from 2015-03-01 to 2016-04-01.
 
 
 ```r
@@ -31,7 +33,7 @@ Quandl.api_key("XXX")
 hsi.df <- Quandl("YAHOO/INDEX_HSI", start_date="2015-03-01", end_date="2016-04-01",
                  collapse="monthly", type = "raw")
 
-ckh.df <- Quandl("YAHOO/HK_0001", start_date="2015-03-01", 
+ckh.df <- Quandl("YAHOO/HK_0001", start_date="2015-03-01",
                  end_date="2016-04-01", collapse="monthly", type = "raw")
 
 saveRDS(hsi.df, "hsi.rds"); saveRDS(ckh.df,"ckh.rds")
@@ -101,7 +103,7 @@ cov.hsi.ckh <- cov(ckh.Return.vector, hsi.Return.vector)
 var.hk <- var(hsi.Return.vector)
 capm_beta = cov.hsi.ckh/var.hk
 
-fit <- lm(ckh.Return ~ hsi.Risk.premium, data = hsi.ckh.returns) 
+fit <- lm(ckh.Return ~ hsi.Risk.premium, data = hsi.ckh.returns)
 summary(fit)
 ```
 
@@ -111,8 +113,8 @@ Call:
 lm(formula = ckh.Return ~ hsi.Risk.premium, data = hsi.ckh.returns)
 
 Residuals:
-      Min        1Q    Median        3Q       Max 
--0.031033 -0.022800  0.001032  0.010137  0.050709 
+      Min        1Q    Median        3Q       Max
+-0.031033 -0.022800  0.001032  0.010137  0.050709
 
 Coefficients:
                  Estimate Std. Error t value Pr(>|t|)    
@@ -122,7 +124,7 @@ hsi.Risk.premium 0.671372   0.101209   6.634 3.69e-05 ***
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Residual standard error: 0.02565 on 11 degrees of freedom
-Multiple R-squared:    0.8,	Adjusted R-squared:  0.7818 
+Multiple R-squared:    0.8,	Adjusted R-squared:  0.7818
 F-statistic:    44 on 1 and 11 DF,  p-value: 3.692e-05
 ```
 
@@ -130,7 +132,7 @@ Up to this point we have all we need to plot regressions. We will start with a b
 
 
 ```r
-p11 <- ggplot(hsi.ckh.returns, aes(x=hsi.Risk.premium, y=ckh.Return)) + geom_point(shape=1) + geom_smooth(method=lm) 
+p11 <- ggplot(hsi.ckh.returns, aes(x=hsi.Risk.premium, y=ckh.Return)) + geom_point(shape=1) + geom_smooth(method=lm)
 p11
 ```
 
@@ -140,7 +142,7 @@ p11
 
 
 ```r
-p11 <- ggplot(hsi.ckh.returns, aes(x=hsi.Risk.premium, y=ckh.Return)) + geom_point(shape=1) + geom_smooth(method=lm, se=FALSE) 
+p11 <- ggplot(hsi.ckh.returns, aes(x=hsi.Risk.premium, y=ckh.Return)) + geom_point(shape=1) + geom_smooth(method=lm, se=FALSE)
 p11
 ```
 
@@ -154,7 +156,7 @@ We can change the text of the axis labels using the `scale_x_continuous` and `sc
 
 
 ```r
-p11 <- p11 + scale_x_continuous(name = "HSI risk premium") + 
+p11 <- p11 + scale_x_continuous(name = "HSI risk premium") +
       scale_y_continuous(name = "CKH return")
 p11
 ```
@@ -179,8 +181,8 @@ We can also include more information about the regression line itself. It would 
 
 
 ```r
-p11 <- p11 + annotate("text", x=0.1, y=-0.05, label = "R^2=0.78") + 
-      annotate("text", x=0.1, y=-0.06, label = "alpha=0.00") + 
+p11 <- p11 + annotate("text", x=0.1, y=-0.05, label = "R^2=0.78") +
+      annotate("text", x=0.1, y=-0.06, label = "alpha=0.00") +
       annotate("text", x=0.1, y=-0.07, label = "beta=0.67")
 p11
 ```
@@ -191,12 +193,12 @@ Another option would be to add greek letters and exponents.
 
 
 ```r
-p11 <- ggplot(hsi.ckh.returns, aes(x=hsi.Risk.premium, y=ckh.Return)) + geom_point(shape=1) + 
+p11 <- ggplot(hsi.ckh.returns, aes(x=hsi.Risk.premium, y=ckh.Return)) + geom_point(shape=1) +
       geom_smooth(method=lm, se=FALSE) + ggtitle("CKH regression line") +
       scale_x_continuous(name = "HSI risk premium") +
-      scale_y_continuous(name = "CKH return") + 
-      annotate("text", x=0.1, y=-0.05, label = "R^2 == 0.78", parse=T) + 
-      annotate("text", x=0.1, y=-0.06, label = "alpha == 0.00", parse=T) + 
+      scale_y_continuous(name = "CKH return") +
+      annotate("text", x=0.1, y=-0.05, label = "R^2 == 0.78", parse=T) +
+      annotate("text", x=0.1, y=-0.06, label = "alpha == 0.00", parse=T) +
       annotate("text", x=0.1, y=-0.07, label = "beta == 0.67", parse=T)
 p11
 ```
@@ -207,20 +209,20 @@ To make the coefficients more clear we will add some elements to increase visibi
 
 
 ```r
-p11 <- ggplot(hsi.ckh.returns, aes(x=hsi.Risk.premium, y=ckh.Return)) + 
+p11 <- ggplot(hsi.ckh.returns, aes(x=hsi.Risk.premium, y=ckh.Return)) +
       geom_point(shape=1) + geom_smooth(method=lm, se=FALSE) +
       ggtitle("CKH regression line") +
       scale_x_continuous(name = "HSI risk premium") +
       scale_y_continuous(name = "CKH return") +
-      annotate("rect", xmin = 0.075, xmax = 0.125, ymin = -0.075, ymax = -0.045, fill="white", colour="red") + 
-      annotate("text", x=0.1, y=-0.05, label = "R^2 == 0.78", parse=T) + annotate("text", x=0.1, y=-0.06, label = "alpha == 0.00", parse=T) + 
+      annotate("rect", xmin = 0.075, xmax = 0.125, ymin = -0.075, ymax = -0.045, fill="white", colour="red") +
+      annotate("text", x=0.1, y=-0.05, label = "R^2 == 0.78", parse=T) + annotate("text", x=0.1, y=-0.06, label = "alpha == 0.00", parse=T) +
       annotate("text", x=0.1, y=-0.07, label = "beta == 0.67", parse=T)
 p11
 ```
 
 <img src="/figure/lr_12-1.png" title="plot of chunk lr_12" alt="plot of chunk lr_12" style="display: block; margin: auto;" />
 
-Another customization could be to show the trend line using rounded digits (or even significant digits) from regression coefficients. This requires us to write a function and is not as easy to obtain as the last plot. 
+Another customization could be to show the trend line using rounded digits (or even significant digits) from regression coefficients. This requires us to write a function and is not as easy to obtain as the last plot.
 
 
 ```r
@@ -236,7 +238,7 @@ p11 <- ggplot(hsi.ckh.returns, aes(x=hsi.Risk.premium, y=ckh.Return)) + geom_poi
       ggtitle("CKH regression line") +
       scale_x_continuous(name = "HSI risk premium") +
       scale_y_continuous(name = "CKH return") +
-      annotate("rect", xmin = 0.00, xmax = 0.1, ymin = -0.056, ymax = -0.044, fill="white", colour="red") + 
+      annotate("rect", xmin = 0.00, xmax = 0.1, ymin = -0.056, ymax = -0.044, fill="white", colour="red") +
       annotate("text", x = 0.05, y = -0.05, label = equation(fit), parse = TRUE)
 p11
 ```
@@ -264,7 +266,7 @@ These instructions are taken from [here](https://www.google.com.au/url?sa=t&rct=
 ```r
 library(extrafont)
 
-download.file("http://simonsoftware.se/other/xkcd.ttf", 
+download.file("http://simonsoftware.se/other/xkcd.ttf",
               dest="xkcd.ttf", mode="wb")
 system("mkdir ~/.fonts")
 system("cp xkcd.ttf  ~/.fonts")
@@ -281,14 +283,14 @@ p11 <- ggplot(hsi.ckh.returns, aes(x=hsi.Risk.premium, y=ckh.Return)) + geom_poi
       ggtitle("CKH regression line") +
       scale_x_continuous(name = "HSI risk premium") +
       scale_y_continuous(name = "CKH return") +
-      annotate("rect", xmin = 0.00, xmax = 0.1, ymin = -0.056, ymax = -0.044, fill="white", colour="red") + 
-      annotate("text", x = 0.05, y = -0.05, label = equation(fit), parse = TRUE) + 
+      annotate("rect", xmin = 0.00, xmax = 0.1, ymin = -0.056, ymax = -0.044, fill="white", colour="red") +
+      annotate("text", x = 0.05, y = -0.05, label = equation(fit), parse = TRUE) +
       theme(axis.line.x = element_line(size=.5, colour = "black"),
-            axis.line.y = element_line(size=.5, colour = "black"), 
-            axis.text.x=element_text(colour="black", size = 9), 
+            axis.line.y = element_line(size=.5, colour = "black"),
+            axis.text.x=element_text(colour="black", size = 9),
             axis.text.y=element_text(colour="black", size = 9),
-            panel.grid.major = element_line(colour = "#d3d3d3"), 
-            panel.grid.minor = element_blank(), 
+            panel.grid.major = element_line(colour = "#d3d3d3"),
+            panel.grid.minor = element_blank(),
             panel.border = element_blank(), panel.background = element_blank(),
             plot.title = element_text(family = "xkcd-Regular"),
             text=element_text(family="xkcd-Regular"))
@@ -297,7 +299,7 @@ p11
 
 <img src="/figure/lr_15-1.png" title="plot of chunk lr_15" alt="plot of chunk lr_15" style="display: block; margin: auto;" />
 
-### Using 'The Economist' theme 
+### Using 'The Economist' theme
 
 There are a wider range of pre-built themes available as part of the `ggthemes` package (more information on these [here](https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html)). Below we've applied `theme_economist()`, which approximates graphs in the Economist magazine.
 
@@ -313,15 +315,15 @@ p11 <- ggplot(hsi.ckh.returns, aes(x=hsi.Risk.premium, y=ckh.Return)) + geom_poi
       ggtitle("CKH regression line") +
       scale_x_continuous(name = "HSI risk premium") +
       scale_y_continuous(name = "CKH return") +
-      annotate("rect", xmin = -0.002, xmax = 0.102, ymin = -0.056, ymax = -0.044, fill="white", colour="red") + 
-      annotate("text", x = 0.05, y = -0.05, label = equation(fit), parse = TRUE) + 
+      annotate("rect", xmin = -0.002, xmax = 0.102, ymin = -0.056, ymax = -0.044, fill="white", colour="red") +
+      annotate("text", x = 0.05, y = -0.05, label = equation(fit), parse = TRUE) +
       theme_economist() +
       theme(axis.line.x = element_line(size=.5, colour = "black"),
-            axis.line.y = element_line(size=.5, colour = "black"), 
-            axis.text.x=element_text(colour="black", size = 9), 
+            axis.line.y = element_line(size=.5, colour = "black"),
+            axis.text.x=element_text(colour="black", size = 9),
             axis.text.y=element_text(colour="black", size = 9),
-            panel.grid.major = element_line(colour = "#d3d3d3"), 
-            panel.grid.minor = element_blank(), 
+            panel.grid.major = element_line(colour = "#d3d3d3"),
+            panel.grid.minor = element_blank(),
             panel.border = element_blank(), panel.background = element_blank(),
             plot.title = element_text(family = "OfficinaSanITC-Book"),
             text=element_text(family="OfficinaSanITC-Book"))
@@ -336,7 +338,7 @@ As before, you can modify your plots a lot as `ggplot2` allows many customisatio
 
 
 ```r
-library(grid) 
+library(grid)
 
 fill <- "#4271AE"
 lines <- "#1F3552"
@@ -345,15 +347,15 @@ p11 <- ggplot(hsi.ckh.returns, aes(x=hsi.Risk.premium, y=ckh.Return)) + geom_poi
       ggtitle("CKH regression line") +
       scale_x_continuous(name = "HSI risk premium") +
       scale_y_continuous(name = "CKH return") +
-      annotate("rect", xmin = 0.00, xmax = 0.1, ymin = -0.056, ymax = -0.044, fill="white", colour="red") + 
-      annotate("text", x = 0.05, y = -0.05, label = equation(fit), parse = TRUE) + 
+      annotate("rect", xmin = 0.00, xmax = 0.1, ymin = -0.056, ymax = -0.044, fill="white", colour="red") +
+      annotate("text", x = 0.05, y = -0.05, label = equation(fit), parse = TRUE) +
       theme(axis.line.x = element_line(size=.5, colour = "black"),
             axis.line.y = element_line(size=.5, colour = "black"),
-            axis.text.x=element_text(colour="black", size = 9), 
-            axis.text.y=element_text(colour="black", size = 9), 
+            axis.text.x=element_text(colour="black", size = 9),
+            axis.text.y=element_text(colour="black", size = 9),
             legend.position = "bottom", legend.position = "horizontal",
-            panel.grid.major = element_line(colour = "#d3d3d3"), 
-            panel.grid.minor = element_blank(), 
+            panel.grid.major = element_line(colour = "#d3d3d3"),
+            panel.grid.minor = element_blank(),
             panel.border = element_blank(), panel.background = element_blank(),
             plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
             text=element_text(family="Tahoma"))
@@ -395,11 +397,11 @@ We can of course apply our other themes as well. Let's try the XKCD theme.
 
 ```r
 autoplot(fit, label.size = 3) + theme(axis.line.x = element_line(size=.5, colour = "black"),
-            axis.line.y = element_line(size=.5, colour = "black"), 
-            axis.text.x=element_text(colour="black", size = 9), 
+            axis.line.y = element_line(size=.5, colour = "black"),
+            axis.text.x=element_text(colour="black", size = 9),
             axis.text.y=element_text(colour="black", size = 9),
-            panel.grid.major = element_line(colour = "#d3d3d3"), 
-            panel.grid.minor = element_blank(), 
+            panel.grid.major = element_line(colour = "#d3d3d3"),
+            panel.grid.minor = element_blank(),
             panel.border = element_blank(), panel.background = element_blank(),
             plot.title = element_text(family = "xkcd-Regular"),
             text=element_text(family="xkcd-Regular"))
@@ -407,7 +409,7 @@ autoplot(fit, label.size = 3) + theme(axis.line.x = element_line(size=.5, colour
 
 <img src="/figure/lr_20-1.png" title="plot of chunk lr_20" alt="plot of chunk lr_20" style="display: block; margin: auto;" />
 
-### Using 'The Economist' theme 
+### Using 'The Economist' theme
 
 And now the Economist theme.
 
@@ -415,11 +417,11 @@ And now the Economist theme.
 ```r
 autoplot(fit, label.size = 3) + theme_economist() +
       theme(axis.line.x = element_line(size=.5, colour = "black"),
-            axis.line.y = element_line(size=.5, colour = "black"), 
-            axis.text.x=element_text(colour="black", size = 9), 
+            axis.line.y = element_line(size=.5, colour = "black"),
+            axis.text.x=element_text(colour="black", size = 9),
             axis.text.y=element_text(colour="black", size = 9),
-            panel.grid.major = element_line(colour = "#d3d3d3"), 
-            panel.grid.minor = element_blank(), 
+            panel.grid.major = element_line(colour = "#d3d3d3"),
+            panel.grid.minor = element_blank(),
             panel.border = element_blank(), panel.background = element_blank(),
             plot.title = element_text(family = "OfficinaSanITC-Book"),
             text=element_text(family="OfficinaSanITC-Book"))
@@ -435,11 +437,11 @@ Finally, we can also fully customise the diagnostic plots to match our regressio
 ```r
 autoplot(fit, label.size = 3) + theme(axis.line.x = element_line(size=.5, colour = "black"),
             axis.line.y = element_line(size=.5, colour = "black"),
-            axis.text.x=element_text(colour="black", size = 9), 
-            axis.text.y=element_text(colour="black", size = 9), 
+            axis.text.x=element_text(colour="black", size = 9),
+            axis.text.y=element_text(colour="black", size = 9),
             legend.position = "bottom", legend.position = "horizontal",
-            panel.grid.major = element_line(colour = "#d3d3d3"), 
-            panel.grid.minor = element_blank(), 
+            panel.grid.major = element_line(colour = "#d3d3d3"),
+            panel.grid.minor = element_blank(),
             panel.border = element_blank(), panel.background = element_blank(),
             plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
             text=element_text(family="Tahoma"))

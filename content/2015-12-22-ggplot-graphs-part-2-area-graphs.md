@@ -10,6 +10,8 @@ keywords: rlanguage, ggplot2, data visualisation
 
 In this second tutorial I am doing with [Mauricio Vargas Sepúlveda](http://pachamaltese.github.io/), we will demonstrate some of the many options the `ggplot2` package has for creating and customising area plots. We will use the same [dataset](http://pachamaltese.github.io/stats/trade-chile-china/copper-data-for-tutorial.csv) from the [first](http://t-redactyl.github.io/blog/2015/12/creating-plots-in-r-using-ggplot2-part-1-line-plots.html) post.
 
+[Mauricio](https://twitter.com/pachamaltese) and [I](https://twitter.com/t_redactyl) have also published these graphing posts as a [book on Leanpub](https://leanpub.com/hitchhikers_ggplot2). We tend to put any changes or updates to the code in the book before these blog posts, so please check it out if you have any issues with the code examples in this post; otherwise feel free to contact us with any questions!
+
 The first thing to do is load in the data and libraries, as below:
 
 
@@ -32,12 +34,20 @@ In order to initialise a plot we tell ggplot that `charts.data` is our data, and
 ```r
 charts.data <- read.csv("copper-data-for-tutorial.csv")
 
-p1 <- ggplot() + geom_area(aes(y = export, x = year, fill = product), data = charts.data, 
+p2 <- ggplot() + geom_area(aes(y = export, x = year, fill = product), data = charts.data,
                            stat="identity")
-p1
+p2
 ```
 
 <img src="/figure/area1-1.png" title="plot of chunk area1" alt="plot of chunk area1" style="display: block; margin: auto;" />
+
+A reader of this blog [kindly pointed out](http://stackoverflow.com/questions/40986648/reverse-stacking-order-in-ggplot2-geom-order/40987144#40987144) that for some users, the order in which these two variables are displayed in the graph is reversed (with "Copper" sitting above "Others"). If you encounter this issue, we recommend you add the argument `position = position_stack(reverse = T)` to your `geom_area` command (as recommended by Nathan Day in the Stack Overflow thread):
+
+```r
+p2 <- ggplot() + geom_area(aes(y = export, x = year, fill = product), data = charts.data,
+                           stat="identity", position = position_stack(reverse = T))
+p2
+```
 
 ### Adjusting legend position
 To adjust the position of the legend from the default spot of right of the graph, we add the `theme` option and specify the `legend.position="bottom"` argument. We can also change the title to blank using the ` legend.title = element_blank()` argument and change the legend shape using the `legend.direction="horizontal"` argument.
@@ -46,9 +56,9 @@ To adjust the position of the legend from the default spot of right of the graph
 ```r
 charts.data <- ddply(charts.data, .(year), transform, pos = cumsum(export) - (0.5 * export))
 
-p1 <- p1 + theme(legend.position="bottom", legend.direction="horizontal", 
+p2 <- p2 + theme(legend.position="bottom", legend.direction="horizontal",
                  legend.title = element_blank())
-p1
+p2
 ```
 
 <img src="/figure/area2-1.png" title="plot of chunk area2" alt="plot of chunk area2" style="display: block; margin: auto;" />
@@ -59,14 +69,14 @@ To change the variables displayed name, we need to re-factor our data labels in 
 
 ```r
 charts.data <- as.data.frame(charts.data)
-charts.data$product <- factor(charts.data$product, levels = c("copper","others"), 
+charts.data$product <- factor(charts.data$product, levels = c("copper","others"),
                               labels = c("Copper","Pulp wood, Fruit, Salmon & Others"))
 
-p1 <- ggplot() + geom_area(aes(y = export, x = year, fill = product), data = charts.data,
+p2 <- ggplot() + geom_area(aes(y = export, x = year, fill = product), data = charts.data,
                            stat="identity") + theme(legend.position="bottom",
                                                     legend.direction="horizontal",
                                                     legend.title = element_blank())
-p1
+p2
 ```
 
 <img src="/figure/area3-1.png" title="plot of chunk area3" alt="plot of chunk area3" style="display: block; margin: auto;" />
@@ -76,8 +86,8 @@ To change the axis tick marks, we use the `scale_x_continuous` and/or `scale_y_c
 
 
 ```r
-p1 <- p1 + scale_x_continuous(breaks=seq(2006,2014,1))
-p1
+p2 <- p2 + scale_x_continuous(breaks=seq(2006,2014,1))
+p2
 ```
 
 <img src="/figure/area4-1.png" title="plot of chunk area4" alt="plot of chunk area4" style="display: block; margin: auto;" />
@@ -87,9 +97,9 @@ To add a title, we include the option `ggtitle` and include the name of the grap
 
 
 ```r
-p1 <- p1 + ggtitle("Composition of Exports to China ($)") + 
-            labs(x="Year", y="USD million") 
-p1
+p2 <- p2 + ggtitle("Composition of Exports to China ($)") +
+            labs(x="Year", y="USD million")
+p2
 ```
 
 <img src="/figure/area5-1.png" title="plot of chunk area5" alt="plot of chunk area5" style="display: block; margin: auto;" />
@@ -100,8 +110,8 @@ To change the colours, we use the `scale_colour_manual` command. Note that you c
 
 ```r
 fill <- c("#5F9EA0", "#E1B378")
-p1 <- p1 + scale_fill_manual(values=fill)
-p1
+p2 <- p2 + scale_fill_manual(values=fill)
+p2
 ```
 
 <img src="/figure/area6-1.png" title="plot of chunk area6" alt="plot of chunk area6" style="display: block; margin: auto;" />
@@ -111,16 +121,16 @@ As explained in the previous post, we can also change the overall look of the si
 
 
 ```r
-p1 <- ggplot() + theme_bw() +
-  geom_area(aes(y = export, x = year, fill = product), data = charts.data, 
-            stat="identity") + 
-  theme(legend.position="bottom", legend.direction="horizontal", 
-        legend.title = element_blank()) + 
-  scale_x_continuous(breaks=seq(2006,2014,1)) + 
-  labs(x="Year", y="USD million") + 
-  ggtitle("Composition of Exports to China ($)") + 
+p2 <- ggplot() + theme_bw() +
+  geom_area(aes(y = export, x = year, fill = product), data = charts.data,
+            stat="identity") +
+  theme(legend.position="bottom", legend.direction="horizontal",
+        legend.title = element_blank()) +
+  scale_x_continuous(breaks=seq(2006,2014,1)) +
+  labs(x="Year", y="USD million") +
+  ggtitle("Composition of Exports to China ($)") +
   scale_fill_manual(values=fill)
-p1
+p2
 ```
 
 <img src="/figure/area7-1.png" title="plot of chunk area7" alt="plot of chunk area7" style="display: block; margin: auto;" />
@@ -133,7 +143,7 @@ These instructions are taken from [here](https://www.google.com.au/url?sa=t&rct=
 ```r
 library(extrafont)
 
-download.file("http://simonsoftware.se/other/xkcd.ttf", 
+download.file("http://simonsoftware.se/other/xkcd.ttf",
               dest="xkcd.ttf", mode="wb")
 system("mkdir ~/.fonts")
 system("cp xkcd.ttf  ~/.fonts")
@@ -151,40 +161,40 @@ You can then create your graph:
 
 fill <- c("#56B4E9", "#F0E442")
 
-p1 <- ggplot() + 
-  geom_area(aes(y = export, x = year, fill = product), data = charts.data, stat="identity") + 
-  theme(legend.position="bottom", legend.direction="horizontal", 
-        legend.title = element_blank()) + 
-  scale_x_continuous(breaks=seq(2006,2014,1)) + 
-  labs(x="Year", y="USD million") + 
-  ggtitle("Composition of Exports to China ($)") + 
-  scale_fill_manual(values=fill) + 
+p2 <- ggplot() +
+  geom_area(aes(y = export, x = year, fill = product), data = charts.data, stat="identity") +
+  theme(legend.position="bottom", legend.direction="horizontal",
+        legend.title = element_blank()) +
+  scale_x_continuous(breaks=seq(2006,2014,1)) +
+  labs(x="Year", y="USD million") +
+  ggtitle("Composition of Exports to China ($)") +
+  scale_fill_manual(values=fill) +
   theme(axis.line = element_line(size=1, colour = "black"), panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(), panel.border = element_blank(), 
-        panel.background = element_blank()) + 
-  theme(plot.title=element_text(family="xkcd-Regular"), text=element_text(family="xkcd-Regular"), 
-        axis.text.x=element_text(colour="black", size = 10), 
-        axis.text.y=element_text(colour="black", size = 10)) 
-p1
+        panel.grid.minor = element_blank(), panel.border = element_blank(),
+        panel.background = element_blank()) +
+  theme(plot.title=element_text(family="xkcd-Regular"), text=element_text(family="xkcd-Regular"),
+        axis.text.x=element_text(colour="black", size = 10),
+        axis.text.y=element_text(colour="black", size = 10))
+p2
 ```
 
 <img src="/figure/area10-1.png" title="plot of chunk area10" alt="plot of chunk area10" style="display: block; margin: auto;" />
 
-### Using 'The Economist' theme 
+### Using 'The Economist' theme
 There are a wider range of pre-built themes available as part of the `ggthemes` package (more information on these [here](https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html)). Below we've applied `theme_economist()`, which approximates graphs in the Economist magazine. It is also important to note that the font change argument inside `theme` is optional and it's only to obtain a more similar result compared to the original. For an exact result you need 'Officina Sans' which is a commercial font and is available [here](http://www.myfonts.com/fonts/itc/officina-sans/).
 
 
 ```r
-p1 <- ggplot() + theme_economist() + scale_fill_economist() +
+p2 <- ggplot() + theme_economist() + scale_fill_economist() +
   theme(plot.title=element_text(family="OfficinaSanITC-Book"),
         text=element_text(family="OfficinaSanITC-Book")) +
-  geom_area(aes(y = export, x = year, fill = product), data = charts.data, stat="identity") + 
-  theme(legend.position="bottom", legend.direction="horizontal", 
-        legend.title = element_blank()) + 
-  scale_x_continuous(breaks=seq(2006,2014,1)) + 
-  labs(x="Year", y="USD million") + 
+  geom_area(aes(y = export, x = year, fill = product), data = charts.data, stat="identity") +
+  theme(legend.position="bottom", legend.direction="horizontal",
+        legend.title = element_blank()) +
+  scale_x_continuous(breaks=seq(2006,2014,1)) +
+  labs(x="Year", y="USD million") +
   ggtitle("Composition of Exports to China ($)")
-p1
+p2
 ```
 
 <img src="/figure/area8-1.png" title="plot of chunk area1" alt="plot of chunk area1" style="display: block; margin: auto;" />
@@ -194,17 +204,17 @@ Below we've applied `theme_fivethirtyeight()`, which approximates graphs in the 
 
 
 ```r
-p1 <- ggplot() + theme_fivethirtyeight() + scale_fill_fivethirtyeight() +
-  theme(plot.title=element_text(family="Atlas Grotesk Medium"), 
+p2 <- ggplot() + theme_fivethirtyeight() + scale_fill_fivethirtyeight() +
+  theme(plot.title=element_text(family="Atlas Grotesk Medium"),
         text=element_text(family="Atlas Grotesk Light")) +
-  geom_area(aes(y = export, x = year, fill = product), data = charts.data, 
-            stat="identity") + 
-  theme(legend.position="bottom", legend.direction="horizontal", 
-        legend.title = element_blank()) + 
-  scale_x_continuous(breaks=seq(2006,2014,1)) + 
-  labs(x="Year", y="USD million") + 
+  geom_area(aes(y = export, x = year, fill = product), data = charts.data,
+            stat="identity") +
+  theme(legend.position="bottom", legend.direction="horizontal",
+        legend.title = element_blank()) +
+  scale_x_continuous(breaks=seq(2006,2014,1)) +
+  labs(x="Year", y="USD million") +
   ggtitle("Composition of Exports to China ($)")
-p1
+p2
 ```
 
 <img src="/figure/area9-1.png" title="plot of chunk area1" alt="plot of chunk area1" style="display: block; margin: auto;" />
@@ -216,23 +226,23 @@ As before, you can modify your plots a lot as `ggplot2` allows many customisatio
 ```r
 fill <- c("#40b8d0", "#b2d183")
 
-p1 <- ggplot() + 
-  geom_area(aes(y = export, x = year, fill = product), data = charts.data, 
-            stat="identity") + 
-  theme(legend.position="bottom", legend.direction="horizontal", 
-        legend.title = element_blank()) + 
-  scale_x_continuous(breaks=seq(2006,2014,1)) + 
-  labs(x="Year", y="USD million") + 
-  ggtitle("Composition of Exports to China ($)") + 
-  scale_fill_manual(values=fill) + 
-  theme(axis.line = element_line(size=1, colour = "black"), 
-        panel.grid.major = element_line(colour = "#d3d3d3"), panel.grid.minor = element_blank(), 
-        panel.border = element_blank(), panel.background = element_blank()) + 
-  theme(plot.title = element_text(size = 14, family = "Tahoma", face = "bold"), 
-        text=element_text(family="Tahoma"), 
-        axis.text.x=element_text(colour="black", size = 10), 
-        axis.text.y=element_text(colour="black", size = 10)) 
-p1
+p2 <- ggplot() +
+  geom_area(aes(y = export, x = year, fill = product), data = charts.data,
+            stat="identity") +
+  theme(legend.position="bottom", legend.direction="horizontal",
+        legend.title = element_blank()) +
+  scale_x_continuous(breaks=seq(2006,2014,1)) +
+  labs(x="Year", y="USD million") +
+  ggtitle("Composition of Exports to China ($)") +
+  scale_fill_manual(values=fill) +
+  theme(axis.line = element_line(size=1, colour = "black"),
+        panel.grid.major = element_line(colour = "#d3d3d3"), panel.grid.minor = element_blank(),
+        panel.border = element_blank(), panel.background = element_blank()) +
+  theme(plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
+        text=element_text(family="Tahoma"),
+        axis.text.x=element_text(colour="black", size = 10),
+        axis.text.y=element_text(colour="black", size = 10))
+p2
 ```
 
 <img src="/figure/area11-1.png" title="plot of chunk area11" alt="plot of chunk area11" style="display: block; margin: auto;" />

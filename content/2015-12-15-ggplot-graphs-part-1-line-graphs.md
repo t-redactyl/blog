@@ -8,9 +8,11 @@ keywords: rlanguage, ggplot2, data visualisation
 
 
 
-I recently teamed up with [Mauricio Vargas Sepúlveda](http://pachamaltese.github.io/) to create some graphing tutorials in R. In the coming weeks, we will be publishing a series of tutorials on how to use the `ggplot2` package to create beautiful and informative data visualisations. Each tutorial will explain how to create a different type of plot, and will take you step-by-step from a basic plot to a highly customised graph.
+I teamed up with [Mauricio Vargas Sepúlveda](http://pachamaltese.github.io/) about a year ago to create some graphing tutorials in R. On this blog you will find a series of tutorials on how to use the `ggplot2` package to create beautiful and informative data visualisations. Each tutorial will explain how to create a different type of plot, and will take you step-by-step from a basic plot to a highly customised graph.
 
-In this first tutorial, we will demonstrate some of the many options the `ggplot2` package has for creating and customising line plots. We will use an international trade [dataset](http://pachamaltese.github.io/stats/trade-chile-china/copper-data-for-tutorial.csv ) made by ourselves from different sources (Chile Customs, Central Bank of Chile and General Directorate of International Economic Relations).
+In this first tutorial, we will demonstrate some of the many options the `ggplot2` package has for creating and customising line plots. We will use an international trade [dataset](http://pachamaltese.github.io/stats/trade-chile-china/copper-data-for-tutorial.csv) made by ourselves from different sources (Chile Customs, Central Bank of Chile and General Directorate of International Economic Relations).
+
+[Mauricio](https://twitter.com/pachamaltese) and [I](https://twitter.com/t_redactyl) have also published these graphing posts as a [book on Leanpub](https://leanpub.com/hitchhikers_ggplot2). We tend to put any changes or updates to the code in the book before these blog posts, so please check it out if you have any issues with the code examples in this post; otherwise feel free to contact us with any questions!
 
 The first thing to do is load in the data and libraries, as below:
 
@@ -32,7 +34,7 @@ In order to initialise a plot we tell ggplot that `charts.data` is our data, and
 
 
 ```r
-p1 <- ggplot() + geom_line(aes(y = export, x = year, colour = product), 
+p1 <- ggplot() + geom_line(aes(y = export, x = year, colour = product),
                            data = charts.data, stat="identity")
 p1
 ```
@@ -44,7 +46,7 @@ To change the line width, we add a `size` argument to `geom_line`.
 
 
 ```r
-p1 <- ggplot() + geom_line(aes(y = export, x = year, colour = product), size=1.5, 
+p1 <- ggplot() + geom_line(aes(y = export, x = year, colour = product), size=1.5,
                            data = charts.data, stat="identity")
 p1
 ```
@@ -57,10 +59,10 @@ To change the variables displayed name, we need to re-factor our data labels in 
 
 ```r
 charts.data <- as.data.frame(charts.data)
-charts.data$product <- factor(charts.data$product, levels = c("copper","others"), 
+charts.data$product <- factor(charts.data$product, levels = c("copper","others"),
                               labels = c("Copper","Pulp wood, Fruit, Salmon & Others"))
 
-p1 <- ggplot() + geom_line(aes(y = export, x = year, colour = product), size=1.5, 
+p1 <- ggplot() + geom_line(aes(y = export, x = year, colour = product), size=1.5,
                            data = charts.data, stat="identity") +
   theme(legend.position="bottom", legend.direction="horizontal", legend.title = element_blank())
 p1
@@ -84,7 +86,7 @@ To add a title, we include the option `ggtitle` and include the name of the grap
 
 
 ```r
-p1 <- p1 + ggtitle("Composition of Exports to China ($)") + labs(x="Year", y="USD million") 
+p1 <- p1 + ggtitle("Composition of Exports to China ($)") + labs(x="Year", y="USD million")
 p1
 ```
 
@@ -108,13 +110,13 @@ We'll start using a simple theme customisation made adding `theme_bw() ` after `
 
 ```r
 p1 <- ggplot() + theme_bw() +
-  geom_line(aes(y = export, x = year, colour = product), size=1.5, data = charts.data, 
-            stat="identity") + 
-  theme(legend.position="bottom", legend.direction="horizontal", 
-        legend.title = element_blank()) + 
-  scale_x_continuous(breaks=seq(2006,2014,1)) + 
-  labs(x="Year", y="USD million") + 
-  ggtitle("Composition of Exports to China ($)") + 
+  geom_line(aes(y = export, x = year, colour = product), size=1.5, data = charts.data,
+            stat="identity") +
+  theme(legend.position="bottom", legend.direction="horizontal",
+        legend.title = element_blank()) +
+  scale_x_continuous(breaks=seq(2006,2014,1)) +
+  labs(x="Year", y="USD million") +
+  ggtitle("Composition of Exports to China ($)") +
   scale_colour_manual(values=colour)
 p1
 ```
@@ -129,7 +131,7 @@ These instructions are taken from [here](https://www.google.com.au/url?sa=t&rct=
 ```r
 library(extrafont)
 
-download.file("http://simonsoftware.se/other/xkcd.ttf", 
+download.file("http://simonsoftware.se/other/xkcd.ttf",
               dest="xkcd.ttf", mode="wb")
 system("mkdir ~/.fonts")
 system("cp xkcd.ttf  ~/.fonts")
@@ -144,28 +146,28 @@ You can then create your graph:
 ```r
 fill <- c("#56B4E9", "#ff69b4")
 
-p1 <- ggplot() + 
-  geom_line(aes(y = export, x = year, colour = product), size=1.5, data = charts.data, 
-            stat="identity") + 
-  theme(legend.position="bottom", legend.direction="horizontal", 
-        legend.title = element_blank()) + 
-  scale_x_continuous(breaks=seq(2006,2014,1)) + 
-  labs(x="Year", y="USD million") + 
-  ggtitle("Composition of Exports to China ($)") + 
-  scale_color_manual(values=fill) + 
+p1 <- ggplot() +
+  geom_line(aes(y = export, x = year, colour = product), size=1.5, data = charts.data,
+            stat="identity") +
+  theme(legend.position="bottom", legend.direction="horizontal",
+        legend.title = element_blank()) +
+  scale_x_continuous(breaks=seq(2006,2014,1)) +
+  labs(x="Year", y="USD million") +
+  ggtitle("Composition of Exports to China ($)") +
+  scale_color_manual(values=fill) +
   theme(axis.line = element_line(size=1, colour = "black"), panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(), panel.border = element_blank(), 
-        panel.background = element_blank()) + 
-  theme(plot.title=element_text(family="xkcd-Regular"), text=element_text(family="xkcd-Regular"), 
-        axis.text.x=element_text(colour="black", size = 10), 
+        panel.grid.minor = element_blank(), panel.border = element_blank(),
+        panel.background = element_blank()) +
+  theme(plot.title=element_text(family="xkcd-Regular"), text=element_text(family="xkcd-Regular"),
+        axis.text.x=element_text(colour="black", size = 10),
         axis.text.y=element_text(colour="black", size = 10),
-        legend.key=element_rect(fill="white", colour="white")) 
+        legend.key=element_rect(fill="white", colour="white"))
 p1
 ```
 
 <img src="/figure/line10-1.png" title="plot of chunk line10" alt="plot of chunk line10" style="display: block; margin: auto;" />
 
-## Using 'The Economist' theme 
+## Using 'The Economist' theme
 There are a wider range of pre-built themes available as part of the `ggthemes` package (more information on these [here](https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html)). Below we've applied `theme_economist()`, which approximates graphs in the Economist magazine. It is also important that the font change argument inside `theme` is optional and it's only to obtain a more similar result compared to the original. For an exact result you need 'Officina Sans' which is a commercial font and is available [here](http://www.myfonts.com/fonts/itc/officina-sans/).
 
 
@@ -173,12 +175,12 @@ There are a wider range of pre-built themes available as part of the `ggthemes` 
 p1 <- ggplot() + theme_economist() + scale_colour_economist() +
   theme(plot.title=element_text(family="OfficinaSanITC-Book"),
         text=element_text(family="OfficinaSanITC-Book")) +
-  geom_line(aes(y = export, x = year, colour = product), size=1.5, data = charts.data, 
-            stat="identity") + 
-  theme(legend.position="bottom", legend.direction="horizontal", 
-        legend.title = element_blank()) + 
-  scale_x_continuous(breaks=seq(2006,2014,1)) + 
-  labs(x="Year", y="USD million") + 
+  geom_line(aes(y = export, x = year, colour = product), size=1.5, data = charts.data,
+            stat="identity") +
+  theme(legend.position="bottom", legend.direction="horizontal",
+        legend.title = element_blank()) +
+  scale_x_continuous(breaks=seq(2006,2014,1)) +
+  labs(x="Year", y="USD million") +
   ggtitle("Composition of Exports to China ($)")
 p1
 ```
@@ -186,20 +188,20 @@ p1
 <img src="/figure/line8-1.png" title="plot of chunk line10" alt="plot of chunk line10" style="display: block; margin: auto;" />
 
 
-## Using 'Five Thirty Eight' theme 
+## Using 'Five Thirty Eight' theme
 Below we've applied `theme_fivethirtyeight()`, which approximates graphs in the nice [FiveThirtyEight](http://fivethirtyeight.com/) website. Again, it is also important that the font change is optional and it's only to obtain a more similar result compared to the original. For an exact result you need 'Atlas Grotesk' which is a commercial font and is available [here](https://commercialtype.com/catalog/atlas).
 
 
 ```r
 p1 <- ggplot() + theme_fivethirtyeight() + scale_colour_fivethirtyeight() +
-  theme(plot.title=element_text(family="Atlas Grotesk Medium"), 
+  theme(plot.title=element_text(family="Atlas Grotesk Medium"),
         text=element_text(family="Atlas Grotesk Light")) +
-  geom_line(aes(y = export, x = year, colour = product), size=1.5, data = charts.data, 
-            stat="identity") + 
-  theme(legend.position="bottom", legend.direction="horizontal", 
-        legend.title = element_blank()) + 
-  scale_x_continuous(breaks=seq(2006,2014,1)) + 
-  labs(x="Year", y="USD million") + 
+  geom_line(aes(y = export, x = year, colour = product), size=1.5, data = charts.data,
+            stat="identity") +
+  theme(legend.position="bottom", legend.direction="horizontal",
+        legend.title = element_blank()) +
+  scale_x_continuous(breaks=seq(2006,2014,1)) +
+  labs(x="Year", y="USD million") +
   ggtitle("Composition of Exports to China ($)")
 p1
 ```
@@ -214,23 +216,23 @@ As before, you can modify your plots a lot as `ggplot2` allows many customisatio
 ```r
 colour <- c("#40b8d0", "#b2d183")
 
-p1 <- ggplot() + 
-  geom_line(aes(y = export, x = year, colour = product), size=1.5, data = charts.data, 
-            stat="identity") + 
-  theme(legend.position="bottom", legend.direction="horizontal", 
-        legend.title = element_blank()) + 
-  scale_x_continuous(breaks=seq(2006,2014,1)) + 
-  labs(x="Year", y="USD million") + 
-  ggtitle("Composition of Exports to China ($)") + 
-  scale_colour_manual(values=colour) + 
-  theme(axis.line = element_line(size=1, colour = "black"), 
-        panel.grid.major = element_line(colour = "#d3d3d3"), panel.grid.minor = element_blank(), 
-        panel.border = element_blank(), panel.background = element_blank()) + 
-  theme(plot.title = element_text(size = 14, family = "Tahoma", face = "bold"), 
+p1 <- ggplot() +
+  geom_line(aes(y = export, x = year, colour = product), size=1.5, data = charts.data,
+            stat="identity") +
+  theme(legend.position="bottom", legend.direction="horizontal",
+        legend.title = element_blank()) +
+  scale_x_continuous(breaks=seq(2006,2014,1)) +
+  labs(x="Year", y="USD million") +
+  ggtitle("Composition of Exports to China ($)") +
+  scale_colour_manual(values=colour) +
+  theme(axis.line = element_line(size=1, colour = "black"),
+        panel.grid.major = element_line(colour = "#d3d3d3"), panel.grid.minor = element_blank(),
+        panel.border = element_blank(), panel.background = element_blank()) +
+  theme(plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
         text=element_text(family="Tahoma"),
-        axis.text.x=element_text(colour="black", size = 10), 
+        axis.text.x=element_text(colour="black", size = 10),
         axis.text.y=element_text(colour="black", size = 10),
-        legend.key=element_rect(fill="white", colour="white")) 
+        legend.key=element_rect(fill="white", colour="white"))
 p1
 ```
 

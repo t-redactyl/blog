@@ -10,6 +10,8 @@ keywords: rlanguage, ggplot2, data visualisation
 
 This is the seventh tutorial in a series on using `ggplot2` I am creating with [Mauricio Vargas Sepúlveda](http://pachamaltese.github.io/). In this tutorial we will demonstrate some of the many options the `ggplot2` package has for creating and customising histograms. We will use R's [airquality dataset](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/airquality.html) in the `datasets` package.
 
+[Mauricio](https://twitter.com/pachamaltese) and [I](https://twitter.com/t_redactyl) have also published these graphing posts as a [book on Leanpub](https://leanpub.com/hitchhikers_ggplot2). We tend to put any changes or updates to the code in the book before these blog posts, so please check it out if you have any issues with the code examples in this post; otherwise feel free to contact us with any questions!
+
 The first thing to do is load in the data, as below:
 
 
@@ -31,9 +33,9 @@ In order to initialise a plot we tell ggplot that `airquality` is our data, and 
 
 
 ```r
-p1 <- ggplot(airquality, aes(x = Ozone)) + 
+p7 <- ggplot(airquality, aes(x = Ozone)) +
         geom_histogram()
-p1
+p7
 ```
 
 <img src="/figure/histogram_1-1.png" title="plot of chunk histogram_1" alt="plot of chunk histogram_1" style="display: block; margin: auto;" />
@@ -46,12 +48,12 @@ One further change we must make to display the normal curve correctly is adding 
 
 
 ```r
-p1 <- ggplot(airquality, aes(x = Ozone)) + 
+p7 <- ggplot(airquality, aes(x = Ozone)) +
         geom_histogram(aes(y = ..density..)) +
-        stat_function(fun = dnorm, colour = "red", 
-                      arg = list(mean = mean(airquality$Ozone, na.rm = TRUE), 
+        stat_function(fun = dnorm, colour = "red",
+                      arg = list(mean = mean(airquality$Ozone, na.rm = TRUE),
                                  sd = sd(airquality$Ozone, na.rm = TRUE)))
-p1
+p7
 ```
 
 <img src="/figure/histogram_2-1.png" title="plot of chunk histogram_2" alt="plot of chunk histogram_2" style="display: block; margin: auto;" />
@@ -62,9 +64,9 @@ Let's go back to the basic plot and lose the function curve. To change the y-axi
 
 
 ```r
-p1 <- ggplot(airquality, aes(x = Ozone)) + 
+p7 <- ggplot(airquality, aes(x = Ozone)) +
         geom_histogram(aes(y = ..count..))
-p1
+p7
 ```
 
 <img src="/figure/histogram_3-1.png" title="plot of chunk histogram_3" alt="plot of chunk histogram_3" style="display: block; margin: auto;" />
@@ -75,9 +77,9 @@ To change the binwidth, we add a `binwidth` argument to `geom_histogram`. In thi
 
 
 ```r
-p1 <- ggplot(airquality, aes(x = Ozone)) + 
+p7 <- ggplot(airquality, aes(x = Ozone)) +
         geom_histogram(aes(y = ..count..), binwidth = 5)
-p1
+p7
 ```
 
 <img src="/figure/histogram_4-1.png" title="plot of chunk histogram_4" alt="plot of chunk histogram_4" style="display: block; margin: auto;" />
@@ -88,11 +90,11 @@ In order to change the axis labels, we have a couple of options. In this case, w
 
 
 ```r
-p1 <- ggplot(airquality, aes(x = Ozone)) + 
+p7 <- ggplot(airquality, aes(x = Ozone)) +
         geom_histogram(aes(y = ..count..), binwidth = 5) +
         scale_x_continuous(name = "Mean ozone in parts per billion") +
         scale_y_continuous(name = "Count")
-p1
+p7
 ```
 
 <img src="/figure/histogram_5-1.png" title="plot of chunk histogram_5" alt="plot of chunk histogram_5" style="display: block; margin: auto;" />
@@ -101,11 +103,11 @@ ggplot also allows for the use of multiline names (in both axes and titles). Her
 
 
 ```r
-p1 <- ggplot(airquality, aes(x = Ozone)) + 
+p7 <- ggplot(airquality, aes(x = Ozone)) +
         geom_histogram(aes(y = ..count..), binwidth = 5) +
         scale_x_continuous(name = "Mean ozone in\nparts per billion") +
         scale_y_continuous(name = "Count")
-p1
+p7
 ```
 
 <img src="/figure/histogram_6-1.png" title="plot of chunk histogram_6" alt="plot of chunk histogram_6" style="display: block; margin: auto;" />
@@ -116,13 +118,13 @@ The next thing we will change is the axis ticks. Let's make the x-axis ticks app
 
 
 ```r
-p1 <- ggplot(airquality, aes(x = Ozone)) + 
+p7 <- ggplot(airquality, aes(x = Ozone)) +
         geom_histogram(aes(y = ..count..), binwidth = 5) +
         scale_x_continuous(name = "Mean ozone in\nparts per billion",
                            breaks = seq(0, 175, 25),
                            limits=c(0, 175)) +
         scale_y_continuous(name = "Count")
-p1
+p7
 ```
 
 <img src="/figure/histogram_7-1.png" title="plot of chunk histogram_7" alt="plot of chunk histogram_7" style="display: block; margin: auto;" />
@@ -133,14 +135,14 @@ To add a title, we include the option `ggtitle` and include the name of the grap
 
 
 ```r
-p1 <- ggplot(airquality, aes(x = Ozone)) + 
+p7 <- ggplot(airquality, aes(x = Ozone)) +
         geom_histogram(aes(y = ..count..), binwidth = 5) +
         scale_x_continuous(name = "Mean ozone in\nparts per billion",
                            breaks = seq(0, 175, 25),
                            limits=c(0, 175)) +
         scale_y_continuous(name = "Count") +
         ggtitle("Frequency histogram of mean ozone")
-p1
+p7
 ```
 
 <img src="/figure/histogram_8-1.png" title="plot of chunk histogram_8" alt="plot of chunk histogram_8" style="display: block; margin: auto;" />
@@ -154,7 +156,7 @@ To change the line and fill colours of the bars, we add a valid colour to the `c
 barfill <- "gold1"
 barlines <- "goldenrod2"
 
-p1 <- ggplot(airquality, aes(x = Ozone)) + 
+p7 <- ggplot(airquality, aes(x = Ozone)) +
         geom_histogram(aes(y = ..count..), binwidth = 5,
                        colour = barlines, fill = barfill) +
         scale_x_continuous(name = "Mean ozone in\nparts per billion",
@@ -162,7 +164,7 @@ p1 <- ggplot(airquality, aes(x = Ozone)) +
                            limits=c(0, 175)) +
         scale_y_continuous(name = "Count") +
         ggtitle("Frequency histogram of mean ozone")
-p1
+p7
 ```
 
 <img src="/figure/histogram_9-1.png" title="plot of chunk histogram_9" alt="plot of chunk histogram_9" style="display: block; margin: auto;" />
@@ -174,7 +176,7 @@ If you want to go beyond the options in the list above, you can also specify exa
 barfill <- "#4271AE"
 barlines <- "#1F3552"
 
-p1 <- ggplot(airquality, aes(x = Ozone)) + 
+p7 <- ggplot(airquality, aes(x = Ozone)) +
         geom_histogram(aes(y = ..count..), binwidth = 5,
                        colour = barlines, fill = barfill) +
         scale_x_continuous(name = "Mean ozone in\nparts per billion",
@@ -182,23 +184,23 @@ p1 <- ggplot(airquality, aes(x = Ozone)) +
                            limits=c(0, 175)) +
         scale_y_continuous(name = "Count") +
         ggtitle("Frequency histogram of mean ozone")
-p1
+p7
 ```
 
 <img src="/figure/histogram_10-1.png" title="plot of chunk histogram_10" alt="plot of chunk histogram_10" style="display: block; margin: auto;" />
 
-You can also add a gradient to your colour scheme that varies according to the frequency of the values. Below is the default gradient colour scheme. In order to do this, you can see we have changed the `aes(y = ..count..)` argument in `geom_histogram` to `aes(fill = ..count..)`. 
+You can also add a gradient to your colour scheme that varies according to the frequency of the values. Below is the default gradient colour scheme. In order to do this, you can see we have changed the `aes(y = ..count..)` argument in `geom_histogram` to `aes(fill = ..count..)`.
 
 
 ```r
-p1 <- ggplot(airquality, aes(x = Ozone)) + 
+p7 <- ggplot(airquality, aes(x = Ozone)) +
         geom_histogram(aes(fill = ..count..), binwidth = 5) +
         scale_x_continuous(name = "Mean ozone in\nparts per billion",
                            breaks = seq(0, 175, 25),
                            limits=c(0, 175)) +
         scale_y_continuous(name = "Count") +
         ggtitle("Frequency histogram of mean ozone")
-p1
+p7
 ```
 
 <img src="/figure/histogram_11-1.png" title="plot of chunk histogram_11" alt="plot of chunk histogram_11" style="display: block; margin: auto;" />
@@ -207,7 +209,7 @@ You can customise the gradient by changing the anchoring colours for high and lo
 
 
 ```r
-p1 <- ggplot(airquality, aes(x = Ozone)) + 
+p7 <- ggplot(airquality, aes(x = Ozone)) +
         geom_histogram(aes(fill = ..count..), binwidth = 5) +
         scale_x_continuous(name = "Mean ozone in\nparts per billion",
                            breaks = seq(0, 175, 25),
@@ -215,7 +217,7 @@ p1 <- ggplot(airquality, aes(x = Ozone)) +
         scale_y_continuous(name = "Count") +
         ggtitle("Frequency histogram of mean ozone") +
         scale_fill_gradient("Count", low = "blue", high = "red")
-p1
+p7
 ```
 
 <img src="/figure/histogram_12-1.png" title="plot of chunk histogram_12" alt="plot of chunk histogram_12" style="display: block; margin: auto;" />
@@ -229,7 +231,7 @@ As explained in the previous posts, we can also change the overall look of the p
 barfill <- "#4271AE"
 barlines <- "#1F3552"
 
-p1 <- ggplot(airquality, aes(x = Ozone)) + 
+p7 <- ggplot(airquality, aes(x = Ozone)) +
         geom_histogram(aes(y = ..count..), binwidth = 5,
                        colour = barlines, fill = barfill) +
         scale_x_continuous(name = "Mean ozone in\nparts per billion",
@@ -238,7 +240,7 @@ p1 <- ggplot(airquality, aes(x = Ozone)) +
         scale_y_continuous(name = "Count") +
         ggtitle("Frequency histogram of mean ozone") +
         theme_bw()
-p1
+p7
 ```
 
 <img src="/figure/histogram_13-1.png" title="plot of chunk histogram_13" alt="plot of chunk histogram_13" style="display: block; margin: auto;" />
@@ -252,7 +254,7 @@ These instructions are taken from [here](https://www.google.com.au/url?sa=t&rct=
 ```r
 library(extrafont)
 
-download.file("http://simonsoftware.se/other/xkcd.ttf", 
+download.file("http://simonsoftware.se/other/xkcd.ttf",
               dest="xkcd.ttf", mode="wb")
 system("mkdir ~/.fonts")
 system("cp xkcd.ttf  ~/.fonts")
@@ -265,29 +267,29 @@ You can then create your graph:
 
 
 ```r
-p1 <- ggplot(airquality, aes(x = Ozone)) + 
+p7 <- ggplot(airquality, aes(x = Ozone)) +
         geom_histogram(aes(y = ..count..), binwidth = 10,
                        colour = "black", fill = "#56B4E9") +
         scale_x_continuous(name = "Mean ozone in\nparts per billion",
                            breaks = seq(0, 175, 25),
                            limits=c(0, 175)) +
         scale_y_continuous(name = "Count") +
-        ggtitle("Frequency histogram of mean ozone") + 
-        theme(axis.line = element_line(size=1, colour = "black"), 
+        ggtitle("Frequency histogram of mean ozone") +
+        theme(axis.line = element_line(size=1, colour = "black"),
               panel.grid.major = element_blank(),
-              panel.grid.minor = element_blank(), 
-              panel.border = element_blank(), 
+              panel.grid.minor = element_blank(),
+              panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title=element_text(size = 20, family="xkcd-Regular"), 
-              text=element_text(size = 16, family="xkcd-Regular"), 
-              axis.text.x=element_text(colour="black", size = 12), 
+              plot.title=element_text(size = 20, family="xkcd-Regular"),
+              text=element_text(size = 16, family="xkcd-Regular"),
+              axis.text.x=element_text(colour="black", size = 12),
               axis.text.y=element_text(colour="black", size = 12))
-p1
+p7
 ```
 
 <img src="/figure/histogram_14-1.png" title="plot of chunk histogram_14" alt="plot of chunk histogram_14" style="display: block; margin: auto;" />
 
-### Using 'The Economist' theme 
+### Using 'The Economist' theme
 
 There are a wider range of pre-built themes available as part of the `ggthemes` package (more information on these [here](https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html)). Below we've applied `theme_economist()`, which approximates graphs in the Economist magazine.
 
@@ -298,7 +300,7 @@ library(ggthemes)
 barfill <- "#4271AE"
 barlines <- "#1F3552"
 
-p1 <- ggplot(airquality, aes(x = Ozone)) + 
+p7 <- ggplot(airquality, aes(x = Ozone)) +
         geom_histogram(aes(y = ..count..), binwidth = 5,
                    colour = barlines, fill = barfill) +
         scale_x_continuous(name = "Mean ozone in\nparts per billion",
@@ -315,7 +317,7 @@ p1 <- ggplot(airquality, aes(x = Ozone)) +
               axis.title = element_text(size = 12),
               legend.text = element_text(size = 9),
               legend.title=element_text(face = "bold", size = 9))
-p1
+p7
 ```
 
 <img src="/figure/histogram_15-1.png" title="plot of chunk histogram_15" alt="plot of chunk histogram_15" style="display: block; margin: auto;" />
@@ -326,12 +328,12 @@ As before, you can modify your plots a lot as `ggplot2` allows many customisatio
 
 
 ```r
-library(grid) 
+library(grid)
 
 barfill <- "#4271AE"
 barlines <- "#1F3552"
 
-p1 <- ggplot(airquality, aes(x = Ozone)) + 
+p7 <- ggplot(airquality, aes(x = Ozone)) +
         geom_histogram(aes(y = ..count..), binwidth = 5,
                        colour = barlines, fill = barfill) +
         scale_x_continuous(name = "Mean ozone in\nparts per billion",
@@ -340,15 +342,15 @@ p1 <- ggplot(airquality, aes(x = Ozone)) +
         scale_y_continuous(name = "Count") +
         ggtitle("Frequency histogram of mean ozone") +
         theme_bw() +
-        theme(axis.line = element_line(size=1, colour = "black"), 
-              panel.grid.major = element_line(colour = "#d3d3d3"), 
-              panel.grid.minor = element_blank(), 
+        theme(axis.line = element_line(size=1, colour = "black"),
+              panel.grid.major = element_line(colour = "#d3d3d3"),
+              panel.grid.minor = element_blank(),
               panel.border = element_blank(), panel.background = element_blank(),
               plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
-              text=element_text(family="Tahoma"), 
-              axis.text.x=element_text(colour="black", size = 9), 
-              axis.text.y=element_text(colour="black", size = 9)) 
-p1
+              text=element_text(family="Tahoma"),
+              axis.text.x=element_text(colour="black", size = 9),
+              axis.text.y=element_text(colour="black", size = 9))
+p7
 ```
 
 <img src="/figure/histogram_16-1.png" title="plot of chunk histogram_16" alt="plot of chunk histogram_16" style="display: block; margin: auto;" />
@@ -362,7 +364,7 @@ Let's say that we want to add a cutoff value to the chart (75 parts of ozone per
 barfill <- "#4271AE"
 barlines <- "#1F3552"
 
-p1 <- ggplot(airquality, aes(x = Ozone)) + 
+p7 <- ggplot(airquality, aes(x = Ozone)) +
         geom_histogram(aes(y = ..count..), binwidth = 5,
                        colour = barlines, fill = barfill) +
         scale_x_continuous(name = "Mean ozone in\nparts per billion",
@@ -371,17 +373,17 @@ p1 <- ggplot(airquality, aes(x = Ozone)) +
         scale_y_continuous(name = "Count") +
         ggtitle("Frequency histogram of mean ozone") +
         theme_bw() +
-        theme(axis.line = element_line(size=1, colour = "black"), 
-              panel.grid.major = element_line(colour = "#d3d3d3"), 
-              panel.grid.minor = element_blank(), 
+        theme(axis.line = element_line(size=1, colour = "black"),
+              panel.grid.major = element_line(colour = "#d3d3d3"),
+              panel.grid.minor = element_blank(),
               panel.border = element_blank(), panel.background = element_blank(),
               plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
-              text=element_text(family="Tahoma"), 
-              axis.text.x=element_text(colour="black", size = 9), 
+              text=element_text(family="Tahoma"),
+              axis.text.x=element_text(colour="black", size = 9),
               axis.text.y=element_text(colour="black", size = 9)) +
-        geom_vline(xintercept = 75, size = 1, colour = "#FF3721", 
+        geom_vline(xintercept = 75, size = 1, colour = "#FF3721",
                    linetype = "dashed")
-p1
+p7
 ```
 
 <img src="/figure/histogram_17-1.png" title="plot of chunk histogram_17" alt="plot of chunk histogram_17" style="display: block; margin: auto;" />
@@ -396,12 +398,12 @@ In order to produce a panel plot by month, we add the `facet_grid(. ~ Month.f)` 
 
 
 ```r
-airquality_trimmed <- airquality[which(airquality$Month == 5 | 
+airquality_trimmed <- airquality[which(airquality$Month == 5 |
                                        airquality$Month == 7), ]
-airquality_trimmed$Month.f <- factor(airquality_trimmed$Month, 
+airquality_trimmed$Month.f <- factor(airquality_trimmed$Month,
                                      labels = c("May", "July"))
 
-p1 <- ggplot(airquality_trimmed, aes(x = Ozone)) + 
+p7 <- ggplot(airquality_trimmed, aes(x = Ozone)) +
         geom_histogram(aes(y = ..count..), binwidth = 10,
                        colour = barlines, fill = barfill) +
         scale_x_continuous(name = "Mean ozone in\nparts per billion",
@@ -410,16 +412,16 @@ p1 <- ggplot(airquality_trimmed, aes(x = Ozone)) +
         scale_y_continuous(name = "Count") +
         ggtitle("Frequency histogram of mean ozone") +
         theme_bw() +
-        theme(axis.line = element_line(size=1, colour = "black"), 
-              panel.grid.major = element_line(colour = "#d3d3d3"), 
-              panel.grid.minor = element_blank(), 
+        theme(axis.line = element_line(size=1, colour = "black"),
+              panel.grid.major = element_line(colour = "#d3d3d3"),
+              panel.grid.minor = element_blank(),
               panel.border = element_blank(), panel.background = element_blank(),
               plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
-              text=element_text(family="Tahoma"), 
-              axis.text.x=element_text(colour="black", size = 9), 
+              text=element_text(family="Tahoma"),
+              axis.text.x=element_text(colour="black", size = 9),
               axis.text.y=element_text(colour="black", size = 9)) +
         facet_grid(. ~ Month.f, scales = "free")
-p1
+p7
 ```
 
 <img src="/figure/histogram_18-1.png" title="plot of chunk histogram_18" alt="plot of chunk histogram_18" style="display: block; margin: auto;" />
@@ -430,7 +432,7 @@ In order to plot the two months in the same plot, we add several things. Firstly
 ```r
 library(RColorBrewer)
 
-p1 <- ggplot(airquality_trimmed, aes(x = Ozone, fill = Month.f)) + 
+p7 <- ggplot(airquality_trimmed, aes(x = Ozone, fill = Month.f)) +
         geom_histogram(aes(y = ..count..), binwidth = 10,
                        position="identity", alpha=0.6) +
         scale_x_continuous(name = "Mean ozone in\nparts per billion",
@@ -439,16 +441,16 @@ p1 <- ggplot(airquality_trimmed, aes(x = Ozone, fill = Month.f)) +
         scale_y_continuous(name = "Count") +
         ggtitle("Frequency histogram of mean ozone") +
         theme_bw() +
-        theme(axis.line = element_line(size=1, colour = "black"), 
-              panel.grid.major = element_line(colour = "#d3d3d3"), 
-              panel.grid.minor = element_blank(), 
+        theme(axis.line = element_line(size=1, colour = "black"),
+              panel.grid.major = element_line(colour = "#d3d3d3"),
+              panel.grid.minor = element_blank(),
               panel.border = element_blank(), panel.background = element_blank(),
               plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
-              text=element_text(family="Tahoma"), 
-              axis.text.x=element_text(colour="black", size = 9), 
+              text=element_text(family="Tahoma"),
+              axis.text.x=element_text(colour="black", size = 9),
               axis.text.y=element_text(colour="black", size = 9)) +
         scale_fill_brewer(palette="Accent")
-p1
+p7
 ```
 
 <img src="/figure/histogram_19-1.png" title="plot of chunk histogram_19" alt="plot of chunk histogram_19" style="display: block; margin: auto;" />
@@ -459,7 +461,7 @@ Finally, we can format the legend. Firstly, we can change the position by adding
 
 
 ```r
-p1 <- ggplot(airquality_trimmed, aes(x = Ozone, fill = Month.f)) + 
+p7 <- ggplot(airquality_trimmed, aes(x = Ozone, fill = Month.f)) +
         geom_histogram(aes(y = ..count..), binwidth = 10,
                    position="identity", alpha=0.6) +
         scale_x_continuous(name = "Mean ozone in\nparts per billion",
@@ -468,18 +470,18 @@ p1 <- ggplot(airquality_trimmed, aes(x = Ozone, fill = Month.f)) +
         scale_y_continuous(name = "Count") +
         ggtitle("Frequency histogram of mean ozone") +
         theme_bw() +
-        theme(axis.line = element_line(size=1, colour = "black"), 
-              panel.grid.major = element_line(colour = "#d3d3d3"), 
-              panel.grid.minor = element_blank(), 
+        theme(axis.line = element_line(size=1, colour = "black"),
+              panel.grid.major = element_line(colour = "#d3d3d3"),
+              panel.grid.minor = element_blank(),
               panel.border = element_blank(), panel.background = element_blank(),
               plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
-              text=element_text(family="Tahoma"), 
-              axis.text.x=element_text(colour="black", size = 9), 
-              axis.text.y=element_text(colour="black", size = 9), 
+              text=element_text(family="Tahoma"),
+              axis.text.x=element_text(colour="black", size = 9),
+              axis.text.y=element_text(colour="black", size = 9),
               legend.position = "bottom", legend.position = "horizontal") +
         scale_fill_brewer(palette="Accent") +
         labs(fill="Month")
-p1
+p7
 ```
 
 <img src="/figure/histogram_20-1.png" title="plot of chunk histogram_20" alt="plot of chunk histogram_20" style="display: block; margin: auto;" />

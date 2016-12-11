@@ -10,6 +10,8 @@ keywords: rlanguage, ggplot2, data visualisation
 
 In this fourth tutorial I am doing with [Mauricio Vargas Sepúlveda](http://pachamaltese.github.io/), we will demonstrate some of the many options the `ggplot2` package has for creating and customising stacked bar plots. We will use the same [dataset](http://pachamaltese.github.io/stats/trade-chile-china/copper-data-for-tutorial.csv) from the [first](http://t-redactyl.github.io/blog/2015/12/creating-plots-in-r-using-ggplot2-part-1-line-plots.html) post.
 
+[Mauricio](https://twitter.com/pachamaltese) and [I](https://twitter.com/t_redactyl) have also published these graphing posts as a [book on Leanpub](https://leanpub.com/hitchhikers_ggplot2). We tend to put any changes or updates to the code in the book before these blog posts, so please check it out if you have any issues with the code examples in this post; otherwise feel free to contact us with any questions!
+
 The first thing to do is load in the data and libraries, as below:
 
 
@@ -33,9 +35,9 @@ In order to initialise a plot we tell ggplot that `charts.data` is our data, and
 ```r
 charts.data <- read.csv("copper-data-for-tutorial.csv")
 
-p10 <- ggplot() + geom_bar(aes(y = percentage, x = year, fill = product), data = charts.data, 
+p4 <- ggplot() + geom_bar(aes(y = percentage, x = year, fill = product), data = charts.data,
                            stat="identity")
-p10
+p4
 ```
 
 <img src="/figure/bar14-1.png" title="plot of chunk bar14" alt="plot of chunk bar14" style="display: block; margin: auto;" />
@@ -45,9 +47,9 @@ To label the bars according to some variable in the data, we add the `label` arg
 
 
 ```r
-p10 <- p10 + geom_text(data=charts.data, aes(x = year, y = percentage, 
+p4 <- p4 + geom_text(data=charts.data, aes(x = year, y = percentage,
                                              label = paste0(percentage,"%")), size=4)
-p10
+p4
 ```
 
 <img src="/figure/bar15-1.png" title="plot of chunk bar15" alt="plot of chunk bar15" style="display: block; margin: auto;" />
@@ -57,14 +59,14 @@ To adjust the position of the data labels from the default placement, we use the
 
 
 ```r
-charts.data <- ddply(charts.data, .(year), 
+charts.data <- ddply(charts.data, .(year),
                      transform, pos = cumsum(percentage) - (0.5 * percentage))
 
-p10 <- ggplot() + geom_bar(aes(y = percentage, x = year, fill = product), data = charts.data, 
+p4 <- ggplot() + geom_bar(aes(y = percentage, x = year, fill = product), data = charts.data,
                            stat="identity")
-p10 <- p10 + geom_text(data=charts.data, aes(x = year, y = pos, label = paste0(percentage,"%")), 
+p4 <- p4 + geom_text(data=charts.data, aes(x = year, y = pos, label = paste0(percentage,"%")),
                        size=4)
-p10
+p4
 ```
 
 <img src="/figure/bar16-1.png" title="plot of chunk bar16" alt="plot of chunk bar16" style="display: block; margin: auto;" />
@@ -74,9 +76,9 @@ To adjust the position of the legend from the default spot of right of the graph
 
 
 ```r
-p10 <- p10 + theme(legend.position="bottom", legend.direction="horizontal", 
+p4 <- p4 + theme(legend.position="bottom", legend.direction="horizontal",
                    legend.title = element_blank())
-p10
+p4
 ```
 
 <img src="/figure/bar17-1.png" title="plot of chunk bar17" alt="plot of chunk bar17" style="display: block; margin: auto;" />
@@ -87,15 +89,15 @@ To change the variables' displayed name, we need to re-factor our data labels in
 
 ```r
 charts.data <- as.data.frame(charts.data)
-charts.data$product <- factor(charts.data$product, levels = c("copper","others"), 
+charts.data$product <- factor(charts.data$product, levels = c("copper","others"),
                               labels = c("Copper","Pulp wood, Fruit, Salmon & Others"))
 
-p10 <- ggplot() + geom_bar(aes(y = percentage, x = year, fill = product), data = charts.data, 
-                           stat="identity") + 
-  geom_text(data=charts.data, aes(x = year, y = pos, 
+p4 <- ggplot() + geom_bar(aes(y = percentage, x = year, fill = product), data = charts.data,
+                           stat="identity") +
+  geom_text(data=charts.data, aes(x = year, y = pos,
                                   label = paste0(percentage,"%")), size=4) +
   theme(legend.position="bottom", legend.direction="horizontal", legend.title = element_blank())
-p10
+p4
 ```
 
 <img src="/figure/bar18-1.png" title="plot of chunk bar18" alt="plot of chunk bar18" style="display: block; margin: auto;" />
@@ -105,8 +107,8 @@ To change the axis tick marks, we use the `scale_x_continuous` and/or `scale_y_c
 
 
 ```r
-p10 <- p10 + scale_x_continuous(breaks=seq(2006,2014,1))
-p10
+p4 <- p4 + scale_x_continuous(breaks=seq(2006,2014,1))
+p4
 ```
 
 <img src="/figure/bar19-1.png" title="plot of chunk bar19" alt="plot of chunk bar19" style="display: block; margin: auto;" />
@@ -116,10 +118,10 @@ To add a title, we include the option `ggtitle` and include the name of the grap
 
 
 ```r
-p10 <- p10 + labs(x="Year", y="Percentage") + 
+p4 <- p4 + labs(x="Year", y="Percentage") +
   scale_y_continuous(labels = dollar_format(suffix = "%", prefix = "")) +
-  ggtitle("Composition of Exports to China (%)") 
-p10
+  ggtitle("Composition of Exports to China (%)")
+p4
 ```
 
 <img src="/figure/bar20-1.png" title="plot of chunk bar20" alt="plot of chunk bar20" style="display: block; margin: auto;" />
@@ -130,8 +132,8 @@ To change the colours, we use the `scale_colour_manual` command. Note that you c
 
 ```r
 fill <- c("#5F9EA0", "#E1B378")
-p10 <- p10 + scale_fill_manual(values=fill)
-p10
+p4 <- p4 + scale_fill_manual(values=fill)
+p4
 ```
 
 <img src="/figure/bar21-1.png" title="plot of chunk bar21" alt="plot of chunk bar21" style="display: block; margin: auto;" />
@@ -141,16 +143,16 @@ As explained in the previous posts, we can also change the overall look of the g
 
 
 ```r
-p10 <- ggplot() + theme_bw() +
-  geom_bar(aes(y = percentage, x = year, fill = product), data = charts.data, stat="identity") + 
-  geom_text(data=charts.data, aes(x = year, y = pos, label = paste0(percentage,"%")), size=4) + 
-  theme(legend.position="bottom", legend.direction="horizontal", 
-        legend.title = element_blank()) + 
-  scale_x_continuous(breaks=seq(2006,2014,1)) + 
-  scale_y_continuous(labels = dollar_format(suffix = "%", prefix = "")) + 
-  labs(x="Year", y="Percentage") + 
+p4 <- ggplot() + theme_bw() +
+  geom_bar(aes(y = percentage, x = year, fill = product), data = charts.data, stat="identity") +
+  geom_text(data=charts.data, aes(x = year, y = pos, label = paste0(percentage,"%")), size=4) +
+  theme(legend.position="bottom", legend.direction="horizontal",
+        legend.title = element_blank()) +
+  scale_x_continuous(breaks=seq(2006,2014,1)) +
+  scale_y_continuous(labels = dollar_format(suffix = "%", prefix = "")) +
+  labs(x="Year", y="Percentage") +
   ggtitle("Composition of Exports to China (%)")
-p10
+p4
 ```
 
 <img src="/figure/bar22-1.png" title="plot of chunk bar22" alt="plot of chunk bar22" style="display: block; margin: auto;" />
@@ -163,7 +165,7 @@ These instructions are taken from [here](https://www.google.com.au/url?sa=t&rct=
 ```r
 library(extrafont)
 
-download.file("http://simonsoftware.se/other/xkcd.ttf", 
+download.file("http://simonsoftware.se/other/xkcd.ttf",
               dest="xkcd.ttf", mode="wb")
 system("mkdir ~/.fonts")
 system("cp xkcd.ttf  ~/.fonts")
@@ -181,46 +183,46 @@ You can then create your graph:
 
 fill <- c("#56B4E9", "#F0E442")
 
-p10 <- ggplot() + 
-  geom_bar(aes(y = percentage, x = year, fill = product), data = charts.data, stat="identity") + 
-  geom_text(data=charts.data, aes(x = year, y = pos, label = paste0(percentage,"%")), 
-            colour="black", family="xkcd-Regular", size = 5, show.legend = F) + 
-  theme(legend.position="bottom", legend.direction="horizontal", 
-        legend.title = element_blank()) + 
-  scale_x_continuous(breaks=seq(2006,2014,1)) + 
-  scale_y_continuous(labels = dollar_format(suffix = "%", prefix = "")) + 
-  labs(x="Year", y="Percentage") + 
-  ggtitle("Composition of Exports to China (%)") + 
-  scale_fill_manual(values=fill) + 
-  theme(axis.line = element_line(size=1, colour = "black"), 
-        panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        panel.border = element_blank(), panel.background = element_blank()) + 
-  theme(plot.title=element_text(family="xkcd-Regular"), text=element_text(family="xkcd-Regular"), 
-        axis.text.x=element_text(colour="black", size = 10), 
-        axis.text.y=element_text(colour="black", size = 10)) 
-p10
+p4 <- ggplot() +
+  geom_bar(aes(y = percentage, x = year, fill = product), data = charts.data, stat="identity") +
+  geom_text(data=charts.data, aes(x = year, y = pos, label = paste0(percentage,"%")),
+            colour="black", family="xkcd-Regular", size = 5, show.legend = F) +
+  theme(legend.position="bottom", legend.direction="horizontal",
+        legend.title = element_blank()) +
+  scale_x_continuous(breaks=seq(2006,2014,1)) +
+  scale_y_continuous(labels = dollar_format(suffix = "%", prefix = "")) +
+  labs(x="Year", y="Percentage") +
+  ggtitle("Composition of Exports to China (%)") +
+  scale_fill_manual(values=fill) +
+  theme(axis.line = element_line(size=1, colour = "black"),
+        panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.border = element_blank(), panel.background = element_blank()) +
+  theme(plot.title=element_text(family="xkcd-Regular"), text=element_text(family="xkcd-Regular"),
+        axis.text.x=element_text(colour="black", size = 10),
+        axis.text.y=element_text(colour="black", size = 10))
+p4
 ```
 
 <img src="/figure/bar25-1.png" title="plot of chunk bar25" alt="plot of chunk bar25" style="display: block; margin: auto;" />
 
-### Using 'The Economist' theme 
+### Using 'The Economist' theme
 There are a wider range of pre-built themes available as part of the `ggthemes` package (more information on these [here](https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html)). Below we've applied `theme_economist()`, which approximates graphs in the Economist magazine. It is also important that the font change argument inside `theme` is optional and it's only to obtain a more similar result compared to the original. For an exact result you need 'Officina Sans' which is a commercial font and is available [here](http://www.myfonts.com/fonts/itc/officina-sans/).
 
 
 ```r
-p10 <- ggplot() + theme_economist() + scale_fill_economist() + 
-  theme(plot.title=element_text(family="OfficinaSanITC-Book"), 
+p4 <- ggplot() + theme_economist() + scale_fill_economist() +
+  theme(plot.title=element_text(family="OfficinaSanITC-Book"),
         text=element_text(family="OfficinaSanITC-Book")) +
-  geom_bar(aes(y = percentage, x = year, fill = product), data = charts.data, stat="identity") + 
-  geom_text(data=charts.data, aes(x = year, y = pos, label = paste0(percentage,"%")), 
-            colour="white", family="OfficinaSanITC-Book", size=4) + 
-  theme(legend.position="bottom", legend.direction="horizontal", 
-        legend.title = element_blank()) + 
-  scale_x_continuous(breaks=seq(2006,2014,1)) + 
-  scale_y_continuous(labels = dollar_format(suffix = "%", prefix = "")) + 
-  labs(x="Year", y="Percentage") + 
+  geom_bar(aes(y = percentage, x = year, fill = product), data = charts.data, stat="identity") +
+  geom_text(data=charts.data, aes(x = year, y = pos, label = paste0(percentage,"%")),
+            colour="white", family="OfficinaSanITC-Book", size=4) +
+  theme(legend.position="bottom", legend.direction="horizontal",
+        legend.title = element_blank()) +
+  scale_x_continuous(breaks=seq(2006,2014,1)) +
+  scale_y_continuous(labels = dollar_format(suffix = "%", prefix = "")) +
+  labs(x="Year", y="Percentage") +
   ggtitle("Composition of Exports to China (%)")
-p10
+p4
 ```
 
 <img src="/figure/bar23-1.png" title="plot of chunk bar23" alt="plot of chunk bar23" style="display: block; margin: auto;" />
@@ -230,19 +232,19 @@ Below we've applied `theme_fivethirtyeight()`, which approximates graphs in the 
 
 
 ```r
-p10 <- ggplot() + theme_fivethirtyeight() + scale_fill_fivethirtyeight() +   
-  theme(plot.title=element_text(family="Atlas Grotesk Medium"), 
+p4 <- ggplot() + theme_fivethirtyeight() + scale_fill_fivethirtyeight() +   
+  theme(plot.title=element_text(family="Atlas Grotesk Medium"),
         text=element_text(family="Atlas Grotesk Light")) +
-  geom_bar(aes(y = percentage, x = year, fill = product), data = charts.data, stat="identity") + 
-  geom_text(data=charts.data, aes(x = year, y = pos, label = paste0(percentage,"%")), 
-            colour="white", family="Atlas Grotesk Medium", size=4) + 
-  theme(legend.position="bottom", legend.direction="horizontal", 
-        legend.title = element_blank()) + 
-  scale_x_continuous(breaks=seq(2006,2014,1)) + 
-  scale_y_continuous(labels = dollar_format(suffix = "%", prefix = "")) + 
-  labs(x="Year", y="Percentage") + 
+  geom_bar(aes(y = percentage, x = year, fill = product), data = charts.data, stat="identity") +
+  geom_text(data=charts.data, aes(x = year, y = pos, label = paste0(percentage,"%")),
+            colour="white", family="Atlas Grotesk Medium", size=4) +
+  theme(legend.position="bottom", legend.direction="horizontal",
+        legend.title = element_blank()) +
+  scale_x_continuous(breaks=seq(2006,2014,1)) +
+  scale_y_continuous(labels = dollar_format(suffix = "%", prefix = "")) +
+  labs(x="Year", y="Percentage") +
   ggtitle("Composition of Exports to China (%)")
-p10
+p4
 ```
 
 <img src="/figure/bar24-1.png" title="plot of chunk bar24" alt="plot of chunk bar24" style="display: block; margin: auto;" />
@@ -254,25 +256,25 @@ As before, you can modify your plots a lot as `ggplot2` allows many customisatio
 ```r
 fill <- c("#40b8d0", "#b2d183")
 
-p10 <- ggplot() + 
-  geom_bar(aes(y = percentage, x = year, fill = product), data = charts.data, stat="identity") + 
-  geom_text(data=charts.data, aes(x = year, y = pos, label = paste0(percentage,"%")), 
-            colour="black", family="Tahoma", size=4) + 
-  theme(legend.position="bottom", legend.direction="horizontal", 
-        legend.title = element_blank()) + 
-  scale_x_continuous(breaks=seq(2006,2014,1)) + 
-  scale_y_continuous(labels = dollar_format(suffix = "%", prefix = "")) + 
-  labs(x="Year", y="Percentage") + 
-  ggtitle("Composition of Exports to China (%)") + 
-  scale_fill_manual(values=fill) + 
-  theme(axis.line = element_line(size=1, colour = "black"), 
-        panel.grid.major = element_line(colour = "#d3d3d3"), panel.grid.minor = element_blank(), 
-        panel.border = element_blank(), panel.background = element_blank()) + 
-  theme(plot.title = element_text(size = 14, family = "Tahoma", face = "bold"), 
+p4 <- ggplot() +
+  geom_bar(aes(y = percentage, x = year, fill = product), data = charts.data, stat="identity") +
+  geom_text(data=charts.data, aes(x = year, y = pos, label = paste0(percentage,"%")),
+            colour="black", family="Tahoma", size=4) +
+  theme(legend.position="bottom", legend.direction="horizontal",
+        legend.title = element_blank()) +
+  scale_x_continuous(breaks=seq(2006,2014,1)) +
+  scale_y_continuous(labels = dollar_format(suffix = "%", prefix = "")) +
+  labs(x="Year", y="Percentage") +
+  ggtitle("Composition of Exports to China (%)") +
+  scale_fill_manual(values=fill) +
+  theme(axis.line = element_line(size=1, colour = "black"),
+        panel.grid.major = element_line(colour = "#d3d3d3"), panel.grid.minor = element_blank(),
+        panel.border = element_blank(), panel.background = element_blank()) +
+  theme(plot.title = element_text(size = 14, family = "Tahoma", face = "bold"),
         text=element_text(family="Tahoma"),
-        axis.text.x=element_text(colour="black", size = 10), 
-        axis.text.y=element_text(colour="black", size = 10)) 
-p10
+        axis.text.x=element_text(colour="black", size = 10),
+        axis.text.y=element_text(colour="black", size = 10))
+p4
 ```
 
 <img src="/figure/bar26-1.png" title="plot of chunk bar26" alt="plot of chunk bar26" style="display: block; margin: auto;" />
