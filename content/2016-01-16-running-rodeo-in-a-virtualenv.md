@@ -6,6 +6,8 @@ tags: Python, Rodeo, virtualenvs
 keywords: python, programming, web scraping, movielens, christmas
 ---
 
+**Note:** This post was updated on 11/12/2016 to reflect changes in how you change your PYTHONPATH in Rodeo.
+
 I recently discovered the lovely [Rodeo by yhat](http://blog.yhat.com/posts/rodeo-native.html), an IDE for Python that is focused on data science. It was originally released as an in-browser web application, but the development team released it as an application in October last year. I am a **huge** fan of [RStudio](https://www.rstudio.com/), and by early looks Rodeo may fill this role for me on the Python side of things.
 
 However, there was a small hiccup when it came to setting up Rodeo. As you might know, I am a devotee of virtual environments (or [virtualenvs](http://docs.python-guide.org/en/latest/dev/virtualenvs/)) in Python. However, it is not immediately obvious how to run Rodeo within one. I therefore thought I would write this quick tutorial on how to set up Rodeo using a virtualenv.
@@ -36,13 +38,15 @@ Now we're ready to open Rodeo!
 
 ## Setting up Rodeo
 
-The first step to using Rodeo is to install it, so if you haven't done so it can be downloaded from [here](https://www.yhat.com/products/rodeo). When you first open the application, it will ask you to enter your PYTHONPATH, and (very helpfully!) lets you know you can find this by typing `which python` into the command line. The trick to making sure Rodeo recognises that you are working within your virtualenv is entering `which python` **while you are in your virtualenv.** You should get something that looks like the below:
+The first step to setting up Rodeo with a virtualenv is to get the PYTHONPATH of the virtualenv. This is very straightforward: all you need to do is type `which python` at the command line **while you are in your virtualenv.** You should get something that looks like the below:
 
 ```bash
 /Users/<your username>/.virtualenvs/rodeo/bin/python
 ```
 
-(Note that this path will be a bit different if you are not working in Mac OS X.) Enter this path as your PYTHONPATH, and voila! Rodeo will tell you that Python, Jupyter and matplotlib have been found.
+(Note that this path will be a bit different if you are not working in Mac OSX.)
+
+Now let's get Rodeo to use our virtualenv. If you haven't yet installed Rodeo, it can be downloaded from [here](https://www.yhat.com/products/rodeo). Once that is done, we can get on with changing its PYTHONPATH. To do so, we first need to go to Rodeo > Preferences in the Rodeo menu. Under the 'Python' tab, you will find an option called 'Python Command'. This is where we change the PYTHONPATH. Simply paste the path to your virtualenv in this space, click 'OK', and you're good to go!
 
 You can check your code has worked by running this example I got from Wes McKinney's excellent [Python for Data Analysis](http://shop.oreilly.com/product/0636920023784.do).
 
@@ -71,6 +75,6 @@ You can easily switch Rodeo over to using Python 3 by creating a new virtualenv.
 vf new -p python3 rodeo
 ```
 
-We then install all of the required packages as above, and get our PYTHONPATH using `which python`. In order to switch Rodeo's PYTHONPATH over from our old virtualenv, simply go to Preferences > Default Python Command > Add new python path. You can now add your new PYTHONPATH and set it as your default.
+We then install all of the required packages as above, and get our PYTHONPATH using `which python`. In order to switch Rodeo's PYTHONPATH over from our old virtualenv, simply replace the path in 'Python Command' as detailed above.
 
 Now you're ready to go! Happy analysing :)
