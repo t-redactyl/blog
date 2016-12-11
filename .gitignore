@@ -1,3 +1,4 @@
+*.Rmd.md
 .DS_Store
 *.pyc
 output/*
