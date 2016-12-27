@@ -6,11 +6,11 @@ tags: R, ggplot2
 keywords: rlanguage, data science, christmas, ggplot2, data visualisation
 ---
 
-About a month ago, [this classic gem](http://is-r.tumblr.com/post/36277968787/happy-thanksgiving-from-isr) popped up in my Twitter feed. For those unable to view the image, it is a Thanksgiving turkey made completely in ggplot2 made by the guys over at [is.R](http://is-r.tumblr.com/). I was so inspired by this plot I decided to see whether I could similarly draw a Christmas tree using only ggplot2:
+About a month ago, [this classic gem](http://is-r.tumblr.com/post/36277968787/happy-thanksgiving-from-isr) popped up in my Twitter feed. For those unable to view the image, it is a Thanksgiving turkey made completely in ggplot2 by the guys over at [is.R](http://is-r.tumblr.com/). I was so inspired by this plot I decided to see whether I could similarly draw a Christmas tree using only ggplot2:
 
 <img src="/figure/christmas_tree_final.png" title="The final product" style="display: block; margin: auto;" />
 
-For those of you who want to jump straight to the final product, [here](https://gist.github.com/t-redactyl/b9067b1d8862d34b42cb49fc4793f284) is the code you'll need to reproduce the chart below.
+For those of you who want to jump straight to the final product, [here](https://gist.github.com/t-redactyl/b9067b1d8862d34b42cb49fc4793f284) is the code you'll need to reproduce the chart above.
 
 For those who want more of a step-by-step guide, I'll talk you through how I built up each layer of the picture.
 
