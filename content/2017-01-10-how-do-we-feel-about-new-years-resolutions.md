@@ -106,9 +106,9 @@ In order to get a gauge of how much people's followers on Twitter liked their re
 
 The first thing to note is that there is not that much variance in the proportion of tweets getting at least 5 favourites, ranging from 15% to 22%. This suggests that the type of resolution doesn't have that much of an effect on how much followers like them. However, there are some interesting patterns when comparing the proportion of favourites against the sentiment score.
 
-In most cases, the number of favourites follows how the person making the tweet felt about the resolution. Physical Health resolutions tend to be more negative, and also seem to be less likely to attract many favourites, and the more positively-toned Relationships and Finances tweets are more likely to attract favourites.
+In some cases, the number of favourites follows how the person making the tweet felt about the resolution. Physical Health resolutions tend to be more negative, and also seem to be less likely to attract many favourites, and the more positively-toned Relationships and Finances tweets are more likely to attract favourites.
 
-However, Mental Wellbeing and Travel and Holiday tweets break this pattern. While these types of resolutions make the person making them really happy, they are some of the least likely to get five or more favourites. It's hard to say why these resolution topics don't get much love from followers. My best guess about the Mental Health resolutions is that a lot of them are pretty vague, for example this:
+However, Mental Wellbeing and Travel and Holiday tweets surprisingly break this pattern. While these types of resolutions make the person making them really happy, they are less likely to get five or more favourites. It's hard to say why these resolution topics don't get much love from followers. My best guess about the Mental Health resolutions is that a lot of them are pretty vague, for example this:
 
 > new years resolution: breathe in happiness and positives, breath out toxic things, people, and activities. 2017 will be my year. watch.
 
