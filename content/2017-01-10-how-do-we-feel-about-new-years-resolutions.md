@@ -44,7 +44,7 @@ Ok, so now we know what people are making resolutions about, let's have a look a
 
 <img src="/figure/new_years_sentiment-1.png" title="plot of chunk new_years_sentiment" alt="plot of chunk new_years_sentiment" style="display: block; margin: auto;" />
 
-In order to make it a bit easier to interpret these results, I got rid of tweets that had a compound sentiment score of 0 (as they could not be assigned a sentiment). Keeping in mind that negative scores indicate that the tweet was negative, and vice versa for positive scores, we can see that Mental Wellbeing and Travel and Holiday resolutions tend to be pretty positively toned. In contrast, people are generally pretty split about their Physical Health resolutions, with a pretty equal number of people feeling positive and negative about them. This is reflected in the median sentiment score for each of the tweets:
+In order to make it a bit easier to interpret these results, I got rid of tweets that had a compound sentiment score of 0 (as they could not be assigned a sentiment). Keeping in mind that negative scores indicate that the tweet was negative, and vice versa for positive scores, we can see that Mental Wellbeing and Travel and Holiday resolutions tend to be pretty positively toned. In contrast, people are generally split about their Physical Health resolutions, with a pretty equal number of people feeling positive and negative about them. This is reflected in the median sentiment score for each of the tweets:
 
 <div>
 <table class="table table-bordered">
@@ -104,7 +104,7 @@ In order to get a gauge of how much people's followers on Twitter liked their re
 
 <img src="/figure/new_years_favourites-1.png" title="plot of chunk new_years_favourites" alt="plot of chunk new_years_favourites" style="display: block; margin: auto;" />
 
-The first thing to note is that there is not that much variance in the proportion of tweets getting at least 5 favourites, ranging from 17% to 22%. This suggests that the type of resolution doesn't have that much of an effect on how much followers like them. However, there are some interesting patterns when comparing the proportion of favourites against the sentiment score.
+The first thing to note is that there is not that much variance in the proportion of tweets getting at least 5 favourites, ranging from 15% to 22%. This suggests that the type of resolution doesn't have that much of an effect on how much followers like them. However, there are some interesting patterns when comparing the proportion of favourites against the sentiment score.
 
 In most cases, the number of favourites follows how the person making the tweet felt about the resolution. Physical Health resolutions tend to be more negative, and also seem to be less likely to attract many favourites, and the more positively-toned Relationships and Finances tweets are more likely to attract favourites.
 
