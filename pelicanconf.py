@@ -10,7 +10,7 @@ SITEURL = ''
 
 PATH = 'content'
 
-TIMEZONE = 'Australia/Melbourne'
+TIMEZONE = 'Europe/Berlin'
 
 DEFAULT_LANG = u'en'
 
@@ -42,8 +42,8 @@ EXTRA_PATH_METADATA = {
     'extra/robots.txt': {'path': 'robots.txt'},
     'extra/favicon.png': {'path': 'favicon.png'}
 }
-SITESUBTITLE = u'learnings and projects in data analysis'
-SITE_DESCRIPTION = u"My name is Jodie Burchell and I'm a data analyst living in the beautiful city of Melbourne, Australia. This blog is a collection of my data analysis projects and things I've learned using R, Python, Stata and other tools. The opinions expressed here are my own and do not reflect on my employer."
+SITESUBTITLE = u'learnings and projects in data science'
+SITE_DESCRIPTION = u"My name is Jodie Burchell and I'm a data scientist living in the beautiful city of Berlin, Germany. This blog is a collection of my projects and things I've learned using Python, R, SQL and other tools. The opinions expressed here are my own and do not reflect on my employer."
 
 # Google embed plugin
 PLUGINS = ['google_embed']

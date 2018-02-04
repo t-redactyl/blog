@@ -7673,8 +7673,9 @@ button.close {
 /* line 20, ../sass/base/_layout.scss */
 .hero > h1 {
   font-weight: 700;
+  font-size: 4em;
+  text-shadow: 2px 1.5px darkslategrey;
   font-style: normal;
-  font-size: 50px;
   line-height: 1;
   margin-bottom: 8px;
   outline: 0;
@@ -7858,4 +7859,9 @@ article .meta a {
   margin: 0px;
   padding: 6px 0px 0px 0px;
   text-transform: none;
+}
+
+.hero > h4 {
+    font-size: 1.3em;
+    text-shadow: 2px 1.5px darkslategrey;
 }
