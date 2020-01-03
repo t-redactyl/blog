@@ -18,11 +18,11 @@ CONFIG = {
     # Port for `serve`
     'port': 8000,
     # Remote github page site
-    'github_pages_repo': 'git@github.com:cprieto/cprieto.github.io.git',
+    'github_pages_repo': 'git@github.com:t-redactyl/t-redactyl.github.io.git',
     # Remote github page branch
     'github_pages_remote_branch': 'master',
 
-    'site_domain': 'cprieto.com'
+    'site_domain': 't-redactyl.io'
 }
 
 @task
