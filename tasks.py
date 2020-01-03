@@ -76,16 +76,6 @@ def preview(c):
 
 @task
 def publish(c):
-    """Publish to production via rsync"""
-    c.run('pelican -s publishconf.py')
-    c.run(
-        'rsync --delete --exclude ".DS_Store" -pthrvz -c '
-        '{} {production}:{dest_path}'.format(
-            CONFIG['deploy_path'].rstrip('/') + '/',
-            **CONFIG))
-
-@task
-def gh_pages(c):
     """Publish to GitHub Pages"""
     preview(c)
     c.run('ghp-import {deploy_path} -b {github_pages_branch} -c {site_domain}'.format(**CONFIG))
