@@ -38,41 +38,9 @@ def build(c):
     c.run('pelican -s pelicanconf.py')
 
 @task
-def rebuild(c):
-    """`build` with the delete switch"""
-    c.run('pelican -d -s pelicanconf.py')
-
-@task
-def regenerate(c):
-    """Automatically regenerate site upon file modification"""
-    c.run('pelican -r -s pelicanconf.py')
-
-@task
-def serve(c):
-    """Serve site at http://localhost:8000/"""
-
-    class AddressReuseTCPServer(RootedHTTPServer):
-        allow_reuse_address = True
-
-    server = AddressReuseTCPServer(
-        CONFIG['deploy_path'],
-        ('', CONFIG['port']),
-        ComplexHTTPRequestHandler)
-
-    sys.stderr.write('Serving on port {port} ...\n'.format(**CONFIG))
-    server.serve_forever()
-
-@task
-def reserve(c):
-    """`build`, then `serve`"""
-    build(c)
-    serve(c)
-
-@task
 def preview(c):
     """Build production version of site"""
     c.run('pelican -s publishconf.py')
-
 
 @task
 def publish(c):
@@ -81,3 +49,7 @@ def publish(c):
     c.run('ghp-import {deploy_path} -b {github_pages_branch} -c {site_domain}'.format(**CONFIG))
     c.run('git push -f {github_pages_repo} {github_pages_branch}:{github_pages_remote_branch}'.format(**CONFIG))
 
+@task
+def reserve(c):
+    """ Automatically reload and serve changes"""
+    c.run('pelican --listen --autoreload')
