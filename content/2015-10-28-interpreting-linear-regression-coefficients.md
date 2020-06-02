@@ -36,18 +36,24 @@ summary(model)$coef
 
 You can see from the output above that this model has four coefficients, the intercept, the main effect for `wt` , the main effect for `am` and the interaction of `wt * am`. So how do we interpret these? As you will recall, regression equations take the form:
 
-$$E[Y | X] = \beta_0 + \beta_1X$$
+$$
+E[Y | X] = \beta_0 + \beta_1X
+$$
 
 indicating that the expected value of $Y$, given the value of $X$, is calculated by adding the intercept to the value of $X$ multiplied by $\beta_1$. Our specific model is:
 
-$$E[Y | X_1X_2] = \beta_0 + \beta_1(weight) + \beta_2(transmission) + \beta_3(weight \cdot transmission)$$
+$$
+E[Y | X_1X_2] = \beta_0 + \beta_1(weight) + \beta_2(transmission) + \beta_3(weight \cdot transmission)
+$$
 
 Ok, so how do we interpret this? The first part is to understand that the intercept is the miles per gallon a car is expected to have when both car weight and car transmission are equal to 0. This can be seen when we substitute $X_1$ and $X_2$ for 0:
 
-$$\begin{eqnarray} 
-E[Y | X_1X_2] &=& \beta_0 + \beta_1(0) + \beta_2(0) + \beta_3(0 \cdot 0) \cr
-&=& \beta_0 \cr
-\end{eqnarray}$$
+$$
+\begin{aligned} 
+E[Y | X_1X_2] &= \beta_0 + \beta_1(0) + \beta_2(0) + \beta_3(0 \cdot 0) \\
+&= \beta_0
+\end{aligned}
+$$
 
 In this case the intercept, or the miles per gallon of an automatic car of weight 0 lbs, is 31.42. This intercept value is not very helpful as no real car can have a weight of 0. Therefore, before we go any further we need to make our coefficients more useful using a technique called **centring**.
 
@@ -77,29 +83,37 @@ So, the new intercept value is 19.24, which is the predicted miles per gallon fo
 
 Now that we've covered the intercept, how do we interpret the rest? The trick is to break this down by the different levels of `am`. When the transmission is automatic (or when $X_2$ = 0), the regression equation becomes:
 
-$$\begin{eqnarray} 
-E[Y | X_1X_2] &=& \beta_0 + \beta_1(weight) + \beta_2(0) + \beta_3(weight \cdot 0) \cr
-&=& \beta_0 + \beta_1(weight) \cr
-\end{eqnarray}$$
+$$
+\begin{aligned} 
+E[Y | X_1X_2] &= \beta_0 + \beta_1(weight) + \beta_2(0) + \beta_3(weight \cdot 0) \\
+&= \beta_0 + \beta_1(weight)
+\end{aligned}
+$$
 
 Alternatively, when the transmission is manual (or when $X_2$ = 1), the regression equation becomes:
 
-$$\begin{eqnarray} 
-E[Y | X_1X_2] &=& \beta_0 + \beta_1(weight) + \beta_2(1) + \beta_3(weight \cdot 1) \cr
-&=& \beta_0 + \beta_1(weight) + \beta_2 + \beta_3(weight) \cr
-&=& (\beta_0 + \beta_2) + (\beta_1 + \beta_3)(weight) \cr
-\end{eqnarray}$$
+$$
+\begin{aligned}
+E[Y | X_1X_2] &= \beta_0 + \beta_1(weight) + \beta_2(1) + \beta_3(weight \cdot 1) \\
+&= \beta_0 + \beta_1(weight) + \beta_2 + \beta_3(weight) \\
+&= (\beta_0 + \beta_2) + (\beta_1 + \beta_3)(weight)
+\end{aligned}
+$$
 
 Substituting our model coefficients into this, we get:
 
-$$E[Y | X_1X_2] = 19.24 -3.79(weight)$$
+$$
+E[Y | X_1X_2] = 19.24 -3.79(weight)
+$$
 
 for cars with automatic transmission and:
 
-$$\begin{eqnarray} 
-E[Y | X_1X_2] &=& (19.24 -2.17) + (-3.79 -5.3)(weight) \cr
-&=& 17.07 -9.08(weight) \cr
-\end{eqnarray}$$
+$$
+\begin{aligned} 
+E[Y | X_1X_2] &= (19.24 -2.17) + (-3.79 -5.3)(weight) \\
+&= 17.07 -9.08(weight)
+\end{aligned}
+$$
 
 for cars with manual transmission. So if we take a car that weighs 2620 lbs (which would have a value of -0.6 in our centred weight variable), our model predicts that it would have an MPG of 21.5 if it was automatic and 22.49 if it were manual.
 

@@ -28,7 +28,6 @@ DEFAULT_PAGINATION = 5
 
 # These are my nice configurations
 THEME = os.path.join(os.path.dirname(os.path.realpath(__file__)), "theme")
-USE_MATHJAX = True
 ARCHIVES_URL = 'archives.html'
 TYPOGRIFY = True
 ARTICLE_URL = 'blog/{date:%Y}/{date:%m}/{slug}.html'
@@ -46,6 +45,6 @@ SITESUBTITLE = u'learnings and projects in data science'
 SITE_DESCRIPTION = u"My name is Jodie Burchell and I'm a data scientist living in the beautiful city of Berlin, Germany. This blog is a collection of my projects and things I've learned using Python, R, SQL and other tools. The opinions expressed here are my own and do not reflect on my employer."
 
 # Google embed plugin
-PLUGINS = ['google_embed']
+PLUGINS = ['google_embed', 'pelican_jsmath', ]
 
 OUTPUT_PATH = 'output/'
