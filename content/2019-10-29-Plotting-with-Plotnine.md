@@ -4,7 +4,6 @@ date: 2019-10-29
 comments: false
 tags: python, ggplot2
 keywords: plotnine, python, data visualisation, hitchhiker's guide to plotnine
-
 ---
 
 When I transitioned over to working primarily in Python from R, one of the things that I missed was `ggplot2`. For me, the plots in `ggplot2` look so much nicer and the syntax is more intuitive compared to `matplotlib`. Happily, last year I discovered that [Hassan Kibirige](https://twitter.com/HKibirige) has made a comprehensive port of `ggplot2` to Python called [plotnine](https://plotnine.readthedocs.io/en/stable/). Although Hassan is still developing the package, I've found that the port is fairly complete and there is not much I'm unable to do in `plotnine` that I could do in the original `ggplot2`.
