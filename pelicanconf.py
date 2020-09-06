@@ -49,7 +49,7 @@ PLUGINS = ['google_embed', 'pelican_jsmath', ]
 
 OUTPUT_PATH = 'output/'
 
-MARKDOWN = {
-    'extensions': ['fenced_code', 'extra', 'attr_list'],
-    'output_format': 'html5'
-}
+# MARKDOWN = {
+#     'extensions': ['attr_list'],
+#     'output_format': 'html5'
+# }
