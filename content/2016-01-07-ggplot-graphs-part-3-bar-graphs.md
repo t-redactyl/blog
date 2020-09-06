@@ -10,7 +10,9 @@ keywords: rlanguage, ggplot2, data visualisation
 
 In this third tutorial I am doing with [Mauricio Vargas Sepúlveda](http://pachamaltese.github.io/), we will demonstrate some of the many options the `ggplot2` package has for creating and customising bar plots. We will use the same [dataset](http://pachamaltese.github.io/stats/trade-chile-china/copper-data-for-tutorial.csv) from the [first](http://t-redactyl.github.io/blog/2015/12/creating-plots-in-r-using-ggplot2-part-1-line-plots.html) post.
 
-[Mauricio](https://twitter.com/pachamaltese) and [I](https://twitter.com/t_redactyl) have also published these graphing posts as a [book on Leanpub](https://leanpub.com/hitchhikers_ggplot2). We tend to put any changes or updates to the code in the book before these blog posts, so please check it out if you have any issues with the code examples in this post; otherwise feel free to contact us with any questions!
+If you enjoyed this blog post and found it useful, please consider buying our book! It contains chapters detailing how to build and customise all 11 chart types published on the blog, as well as LOWESS charts. The book is also actively maintained (unlike the series on the blog) and contains up-to-date `ggplot` and tidyverse code, and every purchase really helps us out with keeping up with new content.
+
+[![ggplot2 book](/figure/ggplot-book-banner-small.png 'The Hitchhikers Guide to ggplot2'){: .banner }](https://leanpub.com/ggplot-guide)
 
 The first thing to do is load in the data and libraries, as below:
 

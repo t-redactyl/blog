@@ -10,7 +10,9 @@ keywords: rlanguage, ggplot2, data visualisation
 
 This is the eleventh tutorial in a series on using `ggplot2` I am creating with [Mauricio Vargas Sepúlveda](http://pachamaltese.github.io/). In this tutorial we will demonstrate some of the many options the `ggplot2` package has for creating linear regression plots.
 
-[Mauricio](https://twitter.com/pachamaltese) and [I](https://twitter.com/t_redactyl) have also published these graphing posts as a [book on Leanpub](https://leanpub.com/hitchhikers_ggplot2). We tend to put any changes or updates to the code in the book before these blog posts, so please check it out if you have any issues with the code examples in this post; otherwise feel free to contact us with any questions!
+If you enjoyed this blog post and found it useful, please consider buying our book! It contains chapters detailing how to build and customise all 11 chart types published on the blog, as well as LOWESS charts. The book is also actively maintained (unlike the series on the blog) and contains up-to-date `ggplot` and tidyverse code, and every purchase really helps us out with keeping up with new content.
+
+[![ggplot2 book](/figure/ggplot-book-banner-small.png 'The Hitchhikers Guide to ggplot2'){: .banner }](https://leanpub.com/ggplot-guide)
 
 This post will be much more than showing you how to create regression plots. Here we are extracting, cleaning and processing financial data from [Quandl](https://www.quandl.com/).
 
