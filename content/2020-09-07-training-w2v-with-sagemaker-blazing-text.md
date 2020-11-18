@@ -75,7 +75,6 @@ We've specified also what we want the stem of our model name to be using `base_j
 
 
 ```python
-# generic Estimator class requires specifying container name
 bt_model = sagemaker.estimator.Estimator(
     container,
     role,
@@ -93,7 +92,6 @@ Finally, we need to select the hyperparameters for our word2vec model. [This lin
 
 
 ```python
-# hyperparameters can also be added through `set_hyperparameters` method
 bt_model.set_hyperparameters(
     mode="batch_skipgram",
     epochs=10, 
