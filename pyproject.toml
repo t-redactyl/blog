@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "t-redactyl.io"
+version = "0.1.0"
+description = ""
+authors = ["Jodie Burchell <jodie.burchell@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+google_embed = "^0.1.0"
+Markdown = "^3.3.3"
+pelican = "^4.5.3"
+typogrify = "^2.0.7"
+ghp-import = "^1.0.0"
+invoke = "^1.5.0"
+pelican-jsmath = "^0.1.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
