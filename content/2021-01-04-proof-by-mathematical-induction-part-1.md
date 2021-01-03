@@ -55,7 +55,7 @@ We can see that the statement is true for the first 5 cases, but the problem is 
 
 This is exactly what proof by induction is designed to do. What we do first is to prove the first possible statement. In our case, we are dealing with positive integers, so the first possible case is $S_1$. We've already done this in the table above, showing that $1 =\frac{ (1^2 + 1)}{2} = \frac{2}{2} = 1$. This is called the **basis step**. 
 
-We can now move onto proving that all $S_n$ are true, using what is called the **inductive step**. This step uses the fact that we know one statement to be true (in our case, $S_1$), and shows that this implies the next statement to be true. To do so, we generalise our basis step $S_1$ to $S_k$, use the fact we know it is true, and prove that if $S_k$ is true, then $S_{k + 1}$ is also true $(S_k \Rightarrow S_{k + 1})$. This results in a sort of domino effect, where if the first pair of $S_k \Rightarrow S_{k + 1}$ is true, then this means that $S_{k + 1} \Rightarrow S_{k + 2}$ is also true, and so on, covering all possible statements $S_n$. 
+We can now move onto proving that all $S_n$ are true, using what is called the **inductive step**. This step uses the fact that we know one statement to be true (in our case, $S_1$), and shows that this implies the next statement to be true. To do so, we generalise our basis step $S_1$ to $S_k$, use the fact we know it is true, and prove that if $S_k$ is true, then $S_{k + 1}$ is also true ($S_k \Rightarrow S_{k + 1}$, or a [conditional statement](https://www.mathgoodies.com/lessons/vol9/conditional)). This results in a sort of domino effect, where if the first pair of $S_k \Rightarrow S_{k + 1}$ is true, then this means that $S_{k + 1} \Rightarrow S_{k + 2}$ is also true, and so on, covering all possible statements $S_n$. 
 
 In our example, this means that if:
 $$
@@ -82,7 +82,7 @@ And voilà! We have shown that, if we assume our first statement $S_k$ to be tru
 
 ## A more formal example
 
-Let's round off this blog post by showing how a proof by induction could be laid out. We'll take a new problem. Let us say that we wish to prove that the sum $a + ar + ar^2 + \ldots + ar^{n - 1}$ is equal to $a\frac{1 - r^n}{1-r}$, where $r \neq 1$ and $n \in \mathbb{N}$. As $n \in \mathbb{N}$, this is exactly the same as the previous example, where $n$ is in the positive integers. This means our basis step will be the smallest element of that set, 1. Let's get started with laying out the proof.
+Let's round off this blog post by showing how a proof by induction could be laid out. We'll take a new problem. Let us say that we wish to prove that the sum $a + ar + ar^2 + \ldots + ar^{n - 1}$ is equal to $a\frac{1 - r^n}{1-r}$, where $r \neq 1$ and $n \in \mathbb{N}$. As $n \in \mathbb{N}$, this is exactly the same as the previous example, where $n$ is in the positive integers. This means our basis step will be the smallest element of that set, $n = 1$. Let's get started with laying out the proof.
 
 Proof:  
 (1) **Basis step.** Observe that when $n = 1$, then:
