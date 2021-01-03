@@ -80,7 +80,7 @@ We'll start by loading in our map dataframes, and removing Antarctica to make th
 
 
 ```python
-world_map_path = "/Users/jodieburchell/Documents/cristian-data-assignment/data/Longitude_Graticules_and_World_Countries_Boundaries-shp/99bfd9e7-bb42-4728-87b5-07f8c8ac631c2020328-1-1vef4ev.lu5nk.shp"
+world_map_path = "path/to/data/worldmap.shp"
 world_map_df = gpd.read_file(world_map_path)
 world_map_df = world_map_df[world_map_df["CNTRY_NAME"] != "Antarctica"]
 ```
@@ -162,7 +162,7 @@ create_map(wine_world_df, "Price", "Median price of sparkling wine by country",
     
 
 
-While France seemed to have some of the best rated wines, they are also among some of the most expensive as well. Moldova's and New Zealand's wines seem to be cheaper, falling below the \$20 per bottle mark.
+While France seemed to have some of the best rated wines, they are also among some of the most expensive as well. Moldova's and New Zealand's wines seem to be cheaper, falling below the $20 per bottle mark.
 
 These visualisations give us a rough idea of which regions can give us our best bang for our buck, but can we take a more systematic approach to finding the best tradeoff between rating and price?
 
