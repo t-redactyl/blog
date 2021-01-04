@@ -66,7 +66,7 @@ $$
 1 + 2 + 3 + \ldots + k + (k + 1) = \frac{(k + 1)^2 + (k + 1)}{2}
 $$. 
 
-We now know one fact, that our first statement above is true. We must now prove the second one by showing that the lefthand side is equivalent to the righthand side. This looks like quite a sticky algebraic problem. However, we can use what we already know to our advantage to simplify the expression. The lefthand part of the equation is comprised of $(1 + 2 + 3 + \ldots + k) + ((k + 1))$. As we know that $1 + 2 + 3 + \ldots + k$ is the same as $\frac{k^2 + k}{2}$, we can substitute in this expression. The rest is now a simple case of using algebraic simplification to show the two sides of the equation are indeed equivalent:
+We now know one fact, that our first statement above is true. We must now prove the second one by showing that the lefthand side is equivalent to the righthand side. This looks like quite a sticky algebraic problem. However, we can use what we already know to our advantage to simplify the expression. The lefthand part of the equation is comprised of $(1 + 2 + 3 + \ldots + k) + ((k + 1))$. As we know that $1 + 2 + 3 + \ldots + k$ is the same as $\frac{k^2 + k}{2}$, we can substitute in this expression. The rest is now a matter of using algebra to rearrange each side of the equation until they are equal. This is usually a matter of trial and error, but you can see some patterns that will help guide your work. For example, in this example, the lefthand side contains a squared term, which means we're probably going to have to expand the quadratic equation on the righthand side.
 
 $$
 \begin{aligned}
