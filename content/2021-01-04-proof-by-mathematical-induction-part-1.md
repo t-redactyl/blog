@@ -53,9 +53,9 @@ Let's say that we wish to prove that the sum $1 + 2 + 3 + 4 + \ldots + n$ is equ
 
 We can see that the statement is true for the first 5 cases, but the problem is that we have to prove this for all positive numbers, which is an infinite set. Even if we had the time and inclination to go through and prove each case individually, we'd never be able to reach the end! We need to instead come up with some sort of rule that will generalise to every statement $S_n$. 
 
-This is exactly what proof by induction is designed to do. What we do first is to prove the first possible statement. In our case, we are dealing with positive integers, so the first possible case is $S_1$. We've already done this in the table above, showing that $1 =\frac{ (1^2 + 1)}{2} = \frac{2}{2} = 1$. This is called the **basis step**. 
+This is exactly what proof by induction is designed to do. To begin, we prove that the first possible statement is true. In our case, we are dealing with positive integers, so the first possible statement is $S_1$. We've already done this in the table above, showing that $1 =\frac{ (1^2 + 1)}{2} = \frac{2}{2} = 1$. This is called the **basis step**. 
 
-We can now move onto proving that all $S_n$ are true, using what is called the **inductive step**. This step uses the fact that we know one statement to be true (in our case, $S_1$), and shows that this implies the next statement to be true. To do so, we generalise our basis step $S_1$ to $S_k$, use the fact we know it is true, and prove that if $S_k$ is true, then $S_{k + 1}$ is also true ($S_k \Rightarrow S_{k + 1}$, or a [conditional statement](https://www.mathgoodies.com/lessons/vol9/conditional)). This results in a sort of domino effect, where if the first pair of $S_k \Rightarrow S_{k + 1}$ is true, then this means that $S_{k + 1} \Rightarrow S_{k + 2}$ is also true, and so on, covering all possible statements $S_n$. 
+We can now move onto proving that all $S_n$ are true, using what is called the **inductive step**. This step uses the fact that we know one statement to be true (in our case, $S_1$), and shows that this implies the next statement to be true. However, we want to prove this for all $S_n$, so we need to extend our solution beyond just $S_1$ and $S_2$. To do so, we generalise our basis step $S_1$ to be $S_k$, use the fact we know it is true, and prove that if $S_k$ is true, then $S_{k + 1}$ is also true (in other words, we aim to prove the [conditional statement](https://www.mathgoodies.com/lessons/vol9/conditional) $S_k \Rightarrow S_{k + 1}$). This results in a sort of domino effect, where if the first pair of $S_k \Rightarrow S_{k + 1}$ is true, then this means that $S_{k + 1} \Rightarrow S_{k + 2}$ is also true, and so on, covering all possible statements $S_n$. 
 
 In our example, this means that if:
 $$
@@ -66,7 +66,9 @@ $$
 1 + 2 + 3 + \ldots + k + (k + 1) = \frac{(k + 1)^2 + (k + 1)}{2}
 $$. 
 
-We now know one fact, that our first statement above is true. We must now prove the second one by showing that the lefthand side is equivalent to the righthand side. This looks like quite a sticky algebraic problem. However, we can use what we already know to our advantage to simplify the expression. The lefthand part of the equation is comprised of $(1 + 2 + 3 + \ldots + k) + ((k + 1))$. As we know that $1 + 2 + 3 + \ldots + k$ is the same as $\frac{k^2 + k}{2}$, we can substitute in this expression. The rest is now a matter of using algebra to rearrange each side of the equation until they are equal. This is usually a matter of trial and error, but you can see some patterns that will help guide your work. For example, in this example, the lefthand side contains a squared term, which means we're probably going to have to expand the quadratic equation on the righthand side.
+(All that we've done in the above two statements is substitute in $k$ instead of $n$ in the first statement, and $k + 1$ instead of $n$ in the second statement.)
+
+We now know one fact, that our first statement above is true. We must now prove the second statement by showing that the lefthand side is equivalent to the righthand side. This looks like quite a sticky algebraic problem. However, we can use what we already know to our advantage to simplify the expression. The lefthand part of the equation is comprised of $(1 + 2 + 3 + \ldots + k) + ((k + 1))$. As we know that $1 + 2 + 3 + \ldots + k$ is the same as $\frac{k^2 + k}{2}$, we can substitute in this expression. The rest is now a matter of using algebra to rearrange each side of the equation until they are equal. This is usually a matter of trial and error, but you can see some patterns that will help guide your work. In this example, the lefthand side contains a squared term, which means we're probably going to have to expand the quadratic equation on the righthand side.
 
 $$
 \begin{aligned}
@@ -78,11 +80,11 @@ k^2 + k + 2(k + 1) &= (k + 1)^2 + (k + 1) \\
 \end{aligned}
 $$
 
-And voilà! We have shown that, if we assume our first statement $S_k$ to be true, then the subsequent statement $S_{k + 1}$ is also true.
+And voilà! We have shown that, if we assume our first statement $S_k$ to be true, then the subsequent statement $S_{k + 1}$ is also true. Using the logic described above, we can then say that this is true for all $S_n$.
 
 ## A more formal example
 
-Let's round off this blog post by showing how a proof by induction could be laid out. We'll take a new problem. Let us say that we wish to prove that the sum $a + ar + ar^2 + \ldots + ar^{n - 1}$ is equal to $a\frac{1 - r^n}{1-r}$, where $r \neq 1$ and $n \in \mathbb{N}$. As $n \in \mathbb{N}$, this is exactly the same as the previous example, where $n$ is in the positive integers. This means our basis step will be the smallest element of that set, $n = 1$. Let's get started with laying out the proof.
+Let's round off this blog post by showing how a proof by induction could be laid out formally. We'll take a new problem. Let us say that we wish to prove that the sum $a + ar + ar^2 + \ldots + ar^{n - 1}$ is equal to $a\frac{1 - r^n}{1-r}$, where $r \neq 1$ and $n \in \mathbb{N}$. As $n \in \mathbb{N}$, this is exactly the same as the previous example, where $n$ is in the positive integers. This means our basis step will be the smallest element of that set, $n = 1$. Let's get started with laying out the proof.
 
 Proof:  
 (1) **Basis step.** Observe that when $n = 1$, then:
